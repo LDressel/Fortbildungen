@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIS.chat in der Grundschule – Prompt-Sammlung</title>
+<meta name="description" content="Fertige Lernszenarien und Dialogpartner für AIS.chat in der Grundschule – nach Klassenstufe, Fach und Thema, orientiert am LehrplanPLUS Bayern.">
+<link rel="icon" href="bilder/robo-bit.png">
+<style>
+  :root{
+    --lila:#45237a; --lila2:#6a43a8; --lila-hell:#efe9f8; --bg:#f7f5fb; --text:#241b33; --grau:#6b6478;
+    --rand:#e4ddef; --gelb:#fff1b8; --gruen:#1f8a4c; --radius:16px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;font-size:17px}
+  a{color:var(--lila2)}
+  header{background:var(--lila);color:#fff;padding:22px 20px 18px}
+  .wrap{max-width:1040px;margin:0 auto}
+  header h1{margin:0;font-size:1.6rem;letter-spacing:.2px}
+  header p{margin:4px 0 0;opacity:.85;font-size:.98rem}
+  .hilfe{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  details.info{background:rgba(255,255,255,.12);border-radius:12px;padding:0;flex:1 1 300px}
+  details.info summary{cursor:pointer;padding:10px 14px;font-weight:600;list-style:none}
+  details.info summary::-webkit-details-marker{display:none}
+  details.info summary::before{content:"▸ ";}
+  details.info[open] summary::before{content:"▾ ";}
+  details.info .inhalt{padding:0 16px 14px;font-size:.95rem}
+  details.info ol,details.info ul{margin:4px 0;padding-left:22px}
+  details.info li{margin:3px 0}
+  .crumbs{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:14px 20px 0;max-width:1040px;margin:0 auto;font-size:.95rem}
+  .crumb{background:#fff;border:1px solid var(--rand);border-radius:999px;padding:6px 14px;color:var(--grau);text-decoration:none;white-space:nowrap}
+  a.crumb{color:var(--lila);font-weight:600}
+  .crumb.aktiv{background:var(--lila);color:#fff;border-color:var(--lila)}
+  .sep{color:#b7aec6}
+  main{max-width:1040px;margin:0 auto;padding:18px 20px 60px}
+  h2{font-size:1.35rem;margin:6px 0 14px}
+  h3.gruppe{font-size:.85rem;text-transform:uppercase;letter-spacing:.8px;color:var(--grau);margin:24px 0 8px}
+  .kacheln{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+  .kachel{background:#fff;border:2px solid var(--rand);border-radius:var(--radius);padding:18px;text-decoration:none;color:var(--text);display:flex;flex-direction:column;gap:6px;transition:.15s;min-height:110px}
+  .kachel:hover,.kachel:focus{border-color:var(--lila2);transform:translateY(-2px);box-shadow:0 6px 18px rgba(69,35,122,.12)}
+  .kachel .gross{font-size:2.1rem;font-weight:800;color:var(--lila)}
+  .kachel .icon{font-size:2rem}
+  .kachel .titel{font-weight:700;font-size:1.08rem}
+  .kachel .sub{color:var(--grau);font-size:.92rem}
+  .kachel.lk{background:var(--lila-hell)}
+  .liste{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px}
+  .thema{background:#fff;border:2px solid var(--rand);border-radius:var(--radius);padding:14px;text-decoration:none;color:var(--text);display:flex;gap:14px;align-items:flex-start;transition:.15s}
+  .thema:hover,.thema:focus{border-color:var(--lila2);box-shadow:0 6px 18px rgba(69,35,122,.12)}
+  .thema img{width:64px;height:64px;flex:0 0 64px;border-radius:50%}
+  .thema .t{font-weight:700;line-height:1.3}
+  .thema .k{color:var(--grau);font-size:.92rem;margin-top:4px}
+  .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+  .badge{font-size:.75rem;font-weight:700;padding:3px 9px;border-radius:999px;background:#f0edf5;color:#4d4560}
+  .badge.ls{background:#e3f4ea;color:#1b6b3d}
+  .badge.dp{background:#fde8d7;color:#9a4a12}
+  .badge.lb{background:#eef0fb;color:#3c4a8a}
+  .kopf{display:flex;gap:20px;align-items:center;background:#fff;border:2px solid var(--rand);border-radius:var(--radius);padding:18px}
+  .kopf img{width:120px;height:120px;border-radius:50%;flex:0 0 120px}
+  .kopf h2{margin:0 0 4px}
+  .kopf p{margin:4px 0 0;color:var(--grau)}
+  .tipp{background:#fff8e1;border:1px solid #f3df9b;border-radius:12px;padding:10px 14px;margin-top:12px;font-size:.95rem}
+  .typwahl{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:22px 0 6px}
+  .typwahl button{font:inherit;border:2px solid var(--rand);background:#fff;border-radius:999px;padding:7px 16px;cursor:pointer;font-weight:600;color:var(--grau)}
+  .typwahl button.an{background:var(--lila);border-color:var(--lila);color:#fff}
+  .hinweis{color:var(--grau);font-size:.9rem;margin:4px 0 14px}
+  .feld{background:#fff;border:2px solid var(--rand);border-radius:var(--radius);padding:14px 16px;margin:12px 0;display:grid;grid-template-columns:40px 1fr;gap:4px 12px}
+  .nr{width:32px;height:32px;border-radius:50%;background:var(--lila);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;grid-row:span 2}
+  .feld .label{font-weight:700;display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+  .feld .label small{font-weight:500;color:var(--grau)}
+  .wert{white-space:pre-wrap;background:#faf9fc;border:1px solid var(--rand);border-radius:10px;padding:10px 12px;font-size:.96rem;margin-top:6px;word-break:break-word}
+  .wert.lang{max-height:360px;overflow:auto}
+  .wert.text{background:none;border:none;padding:4px 0}
+  mark{background:var(--gelb);padding:0 2px;border-radius:3px}
+  .knopf{font:inherit;font-size:.92rem;font-weight:700;border:none;background:var(--lila);color:#fff;border-radius:999px;padding:8px 16px;cursor:pointer;text-decoration:none;display:inline-flex;gap:6px;align-items:center;white-space:nowrap}
+  .knopf:hover{background:var(--lila2)}
+  .knopf.ok{background:var(--gruen)}
+  .bildfeld{display:flex;gap:14px;align-items:center;margin-top:6px;flex-wrap:wrap}
+  .bildfeld img{width:84px;height:84px;border-radius:50%}
+  .zaehler{font-size:.8rem;color:var(--grau);font-weight:500}
+  .zaehler.zu{color:#c0392b;font-weight:700}
+  .teilen{background:var(--lila-hell);border-radius:var(--radius);padding:14px 18px;margin-top:20px}
+  .teilen h3{margin:0 0 6px;font-size:1.05rem}
+  .teilen ol{margin:4px 0;padding-left:22px}
+  .zurueck{display:inline-block;margin-bottom:12px;font-weight:600;text-decoration:none}
+  footer{text-align:center;color:var(--grau);font-size:.85rem;padding:20px}
+  @media (max-width:600px){.kopf{flex-direction:column;text-align:center}.kopf img{width:96px;height:96px;flex-basis:96px}body{font-size:16px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>🤖 AIS.chat in der Grundschule</h1>
+    <p>Fertige Lernszenarien und Dialogpartner zum Kopieren – nach Klasse, Fach und Thema, orientiert am LehrplanPLUS Bayern.</p>
+    <div class="hilfe">
+      <details class="info">
+        <summary>So geht's in 5 Schritten</summary>
+        <div class="inhalt">
+          <ol>
+            <li>AIS.chat über die ByCS öffnen und ein neues <b>Lernszenario</b> oder einen neuen <b>Dialogpartner</b> anlegen.</li>
+            <li>Hier Klasse, Fach und Thema wählen.</li>
+            <li>Die Felder der Reihe nach kopieren und einfügen. <mark>Gelb markierte Stellen</mark> vorher anpassen.</li>
+            <li>Bild herunterladen und bei „Bild hochladen“ einfügen.</li>
+            <li>Speichern, <b>selbst als Kind testen</b>, dann teilen: Laufzeit wählen und QR-Code oder Link an die Klasse geben.</li>
+          </ol>
+        </div>
+      </details>
+      <details class="info">
+        <summary>Regeln für den Einsatz</summary>
+        <div class="inhalt">
+          <ul>
+            <li>Kinder arbeiten nur mit Lernszenarien, die die Lehrkraft freigegeben hat.</li>
+            <li>Keine persönlichen Daten: keine Namen, Adressen oder Fotos von Kindern.</li>
+            <li>KI-Antworten prüfen (Sachbuch, Lehrkraft) – das ist Medienbildung.</li>
+            <li>Kurze Einsätze von 5–15 Minuten statt ganzer Stunden.</li>
+            <li>Klarer Auftrag vorab, z. B. „Stelle 3 Fragen, schreibe 1 Antwort ins Heft.“</li>
+            <li>Ergebnisse analog sichern (Heft, GoodNotes) – nicht nur im Chat.</li>
+            <li>Kl. 1/2: Start immer gemeinsam am Beamer. Eigenständig ab Kl. 3/4.</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>
+<nav class="crumbs" id="crumbs" aria-label="Navigation"></nav>
+<main id="app"></main>
+<footer>Fortbildung „AIS.chat in der Grundschule“ · Stand November 2026 · Alle Figuren sind erfunden. Lernszenarien vor dem Einsatz immer selbst testen.</footer>
+
+<script src="data.js"></script>
+<script>
+const app = document.getElementById("app");
+const crumbs = document.getElementById("crumbs");
+
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function markiere(s){return esc(s).replace(/\[([^\]]+)\]/g,"<mark>[$1]</mark>")}
+
+function fill(text, s, k){
+  return String(text).replace(/\{([A-Z]+)\}/g,(m,key)=>{
+    if(key==="KL") return k;
+    if(s && s.v && s.v[key]) return s.v[key][k] || s.v[key][Object.keys(s.v[key])[0]];
+    if(GLOBAL_VARS[key]) return GLOBAL_VARS[key][k];
+    return m;
+  });
+}
+
+function grundregeln(s){
+  const r = [
+    "Du sprichst mit Kindern der {KL}. Klasse. Benutze einfache Wörter, die Kinder in diesem Alter kennen.",
+    "Sag nicht einfach die Lösung. Gib lieber einen kleinen Tipp, damit das Kind selbst darauf kommt.",
+    "Frag nie nach echtem Namen, Adresse, Alter, Schule oder Fotos. Schreibt ein Kind so etwas, erinnere freundlich daran, dass man das einer KI nicht verrät.",
+    "Bleib beim Thema. Will das Kind über etwas anderes sprechen, lenke freundlich zurück.",
+    "Ist ein Kind traurig, hat Angst oder erzählt von Streit oder Gefahr, antworte freundlich und sag, dass es mit seiner Lehrkraft oder einem anderen Erwachsenen sprechen soll."
+  ];
+  r.push(s.absicht ? "Die eingebauten Fehler sind Absicht. Alles andere muss stimmen." : "Wenn du etwas nicht sicher weißt, sag das ehrlich.");
+  r.push("Lobe ehrlich und freundlich.");
+  return r;
+}
+
+function instruktionen(s,k,typ){
+  const v = s.verhalten.concat(grundregeln(s)).map(x=>"- "+x).join("\n");
+  let f = ["Antworte normalerweise mit {SAETZE}."].concat(s.format||[]);
+  if(typ==="LS") f.push("Deine erste Nachricht im Gespräch: „"+s.einstieg+"“");
+  const t = "ROLLE\n"+s.rolle+"\n\nKONTEXT\n"+s.kontext+"\n\nVERHALTEN\n"+v+"\n\nFORMAT\n"+f.map(x=>"- "+x).join("\n");
+  return fill(t,s,k);
+}
+
+let feldNr = 0;
+function feldKopie(label, text, opts={}){
+  feldNr++;
+  const id = "f"+feldNr;
+  const zaehl = opts.max ? `<span class="zaehler ${text.length>opts.max?"zu":""}">${text.length}/${opts.max} Zeichen</span>` : "";
+  return `<div class="feld"><div class="nr">${feldNr}</div>
+    <div class="label"><span>${label} ${opts.pflicht?'<span style="color:#c0392b">*</span>':""} ${zaehl}</span>
+      <button class="knopf" data-copy="${id}">📋 Kopieren</button></div>
+    <div><div class="wert ${opts.lang?"lang":""}" id="${id}">${markiere(text)}</div>${opts.hinweis?`<div class="hinweis">${opts.hinweis}</div>`:""}</div></div>`;
+}
+function feldInfo(label, html){
+  feldNr++;
+  return `<div class="feld"><div class="nr">${feldNr}</div><div class="label"><span>${label}</span></div><div><div class="wert text">${html}</div></div></div>`;
+}
+
+function route(){
+  const p = new URLSearchParams(location.hash.slice(1));
+  return {k: p.get("k") ? parseInt(p.get("k")) : null, f: p.get("f"), t: p.get("t"), m: p.get("m")};
+}
+function link(o){
+  const p = new URLSearchParams();
+  if(o.k) p.set("k",o.k); if(o.f) p.set("f",o.f); if(o.t) p.set("t",o.t); if(o.m) p.set("m",o.m);
+  return "#"+p.toString();
+}
+
+function renderCrumbs(r){
+  const teile = [];
+  teile.push(r.k ? `<a class="crumb" href="${link({})}">① ${r.k}. Klasse</a>` : `<span class="crumb aktiv">① Klasse wählen</span>`);
+  if(r.k){
+    const fn = r.f ? (r.f==="lehrkraft" ? "Für dich als Lehrkraft" : FAECHER[r.f].name) : null;
+    teile.push(fn ? `<a class="crumb" href="${link({k:r.k})}">② ${fn}</a>` : `<span class="crumb aktiv">② Fach wählen</span>`);
+  } else teile.push(`<span class="crumb">② Fach</span>`);
+  if(r.k && r.f){
+    let tn = null;
+    if(r.t){ const s = (r.f==="lehrkraft"?LEHRKRAFT:SZENARIEN).find(x=>x.id===r.t); tn = s ? s.titel : null; }
+    teile.push(tn ? `<a class="crumb" href="${link({k:r.k,f:r.f})}">③ Themen</a><span class="sep">›</span><span class="crumb aktiv">${esc(tn)}</span>` : `<span class="crumb aktiv">③ Thema wählen</span>`);
+  } else teile.push(`<span class="crumb">③ Thema</span>`);
+  crumbs.innerHTML = teile.join('<span class="sep">›</span>');
+}
+
+function viewKlasse(){
+  const txt = {1:"Erste Schritte – gemeinsam am Beamer",2:"Kurze Übungen mit Tipps",3:"Eigenständig arbeiten",4:"Eigenständig und kritisch prüfen"};
+  app.innerHTML = `<h2>Für welche Klasse suchst du etwas?</h2><div class="kacheln">`+
+    [1,2,3,4].map(k=>`<a class="kachel" href="${link({k})}"><span class="gross">${k}.</span><span class="titel">Klasse</span><span class="sub">${txt[k]} · ${SZENARIEN.filter(s=>s.kl.includes(k)).length} Themen</span></a>`).join("")+`</div>`;
+}
+
+function viewFach(k){
+  const f = Object.entries(FAECHER).filter(([id,f])=>f.kl.includes(k)).map(([id,f])=>{
+    const n = SZENARIEN.filter(s=>s.fach===id && s.kl.includes(k)).length;
+    if(!n) return "";
+    return `<a class="kachel" href="${link({k,f:id})}"><span class="icon">${f.icon}</span><span class="titel">${f.name}</span><span class="sub">${n} ${n===1?"Thema":"Themen"}</span></a>`;
+  }).join("");
+  const nl = LEHRKRAFT.filter(l=>l.kl.includes(k)).length;
+  app.innerHTML = `<h2>Welches Fach? <small style="font-weight:500;color:var(--grau)">(${k}. Klasse)</small></h2><div class="kacheln">${f}
+    <a class="kachel lk" href="${link({k,f:"lehrkraft"})}"><span class="icon">🧑‍🏫</span><span class="titel">Für dich als Lehrkraft</span><span class="sub">${nl} Prompts zur Vorbereitung – im normalen Chat</span></a></div>`;
+}
+
+function viewThemen(k,f){
+  if(f==="lehrkraft") return viewLehrkraftListe(k);
+  const liste = SZENARIEN.filter(s=>s.fach===f && s.kl.includes(k));
+  const gruppen = {};
+  liste.forEach(s=>{(gruppen[s.lb]=gruppen[s.lb]||[]).push(s)});
+  let html = `<h2>${FAECHER[f].icon} ${FAECHER[f].name} · ${k}. Klasse</h2><p class="hinweis">Gruppiert nach Lernbereichen des LehrplanPLUS. Tippe auf ein Thema.</p>`;
+  for(const lb in gruppen){
+    html += `<h3 class="gruppe">${esc(lb)}</h3><div class="liste">`+gruppen[lb].map(s=>`
+      <a class="thema" href="${link({k,f,t:s.id})}"><img src="bilder/${s.bild}.png" alt="" loading="lazy">
+        <div><div class="t">${esc(s.titel)}</div><div class="k">${esc(fill(s.kurz,s,k))}</div>
+        <div class="badges"><span class="badge ${s.typ==="LS"?"ls":"dp"}">${s.typ==="LS"?"Lernszenario":"Dialogpartner"}</span></div></div></a>`).join("")+`</div>`;
+  }
+  app.innerHTML = html;
+}
+
+function viewDetail(k,f,id,modus){
+  const s = SZENARIEN.find(x=>x.id===id);
+  if(!s){ app.innerHTML = "<p>Thema nicht gefunden.</p>"; return; }
+  const typ = modus || s.typ;
+  feldNr = 0;
+  const F = t=>fill(t,s,k);
+  let html = `<a class="zurueck" href="${link({k,f})}">← Zurück zu den Themen</a>
+  <div class="kopf"><img src="bilder/${s.bild}.png" alt="">
+    <div><h2>${esc(s.titel)}</h2>
+      <div class="badges"><span class="badge ${s.typ==="LS"?"ls":"dp"}">Empfohlen: ${s.typ==="LS"?"Lernszenario":"Dialogpartner"}</span><span class="badge lb">${esc(FAECHER[s.fach].name)} · ${esc(s.lb)}</span><span class="badge">${k}. Klasse</span></div>
+      <p>${esc(F(s.kurz))}</p>
+      ${s.tipp?`<div class="tipp">💡 <b>Tipp für den Unterricht:</b> ${markiere(F(s.tipp))}</div>`:""}
+    </div></div>
+  <div class="typwahl"><b>Anlegen als:</b>
+    <button class="${typ==="LS"?"an":""}" data-modus="LS">Lernszenario</button>
+    <button class="${typ==="DP"?"an":""}" data-modus="DP">Dialogpartner</button></div>
+  <p class="hinweis">${typ==="LS"
+    ? "In AIS.chat ein neues <b>Lernszenario</b> anlegen und diese Felder von oben nach unten ausfüllen."
+    : "In AIS.chat einen neuen <b>Dialogpartner</b> anlegen und diese Felder ausfüllen. Heißt ein Feld bei dir etwas anders, nimm das passende – oder lege es als Lernszenario an (Knopf oben)."}</p>`;
+
+  html += feldInfo("Bild hochladen", `<div class="bildfeld"><img src="bilder/${s.bild}.png" alt=""><a class="knopf" href="bilder/${s.bild}.png" download="${s.bild}.png">⬇️ Bild herunterladen</a></div>`);
+  html += feldKopie(typ==="LS"?"Name des Lernszenarios":"Name des Dialogpartners", F(s.name), {pflicht:true, max:50});
+  html += feldKopie("Kurzbeschreibung", F(s.kb));
+  html += feldInfo("Sprachmodell", esc(MODELLE[s.modell]));
+  if(typ==="LS"){
+    html += feldKopie("Instruktionen", instruktionen(s,k,"LS"), {lang:true, hinweis:"Alles in das Feld „Instruktionen“ einfügen. Die Regeln für Grundschulkinder sind schon enthalten."});
+    html += feldKopie("Arbeitsauftrag", F(s.auftrag), {hinweis:"Das sehen die Kinder als Aufgabe."});
+  } else {
+    html += feldInfo("Schulart, Klassenstufe und Fach", `Grundschule · ${k}. Klasse · ${esc(FAECHER[s.fach].name)}`);
+    html += feldKopie("Kompetenzen und Unterrichtssituation", F(s.kompetenz || (s.lb+": "+s.kurz)));
+    html += feldKopie("Einstiegsfrage", F(s.einstieg), {hinweis:"Die erste Nachricht der Figur."});
+    html += feldKopie("Verhalten / Antwortverhalten", instruktionen(s,k,"DP"), {lang:true, hinweis:"In das Feld für Beschreibung und Verhalten der Figur einfügen. Die Regeln für Grundschulkinder sind schon enthalten."});
+    html += feldKopie("Arbeitsauftrag für die Kinder", F(s.auftrag), {hinweis:"Gibt es dafür kein Feld, an die Tafel schreiben oder mündlich geben."});
+  }
+  if(s.hw) html += feldInfo("Hintergrundwissen", "📎 "+markiere(F(s.hw)));
+
+  html += `<div class="teilen"><h3>Speichern, testen und teilen</h3><ol>
+    <li>Speichern und <b>selbst als Kind ausprobieren</b>. Passt etwas nicht, die Instruktionen anpassen.</li>
+    <li>Teilen: Laufzeit kurz wählen (z. B. diese Unterrichtsstunde oder einen Tag).</li>
+    <li>QR-Code am Beamer zeigen oder den Link an die Klasse geben. Die Kinder brauchen kein eigenes Konto.</li>
+    <li>Arbeitsauftrag mündlich wiederholen: Was soll am Ende im Heft stehen?</li></ol></div>`;
+  app.innerHTML = html;
+  app.querySelectorAll("[data-modus]").forEach(b=>b.onclick=()=>{location.hash = link({k,f,t:id,m:b.dataset.modus===s.typ?null:b.dataset.modus})});
+}
+
+function viewLehrkraftListe(k){
+  const liste = LEHRKRAFT.filter(l=>l.kl.includes(k));
+  const gruppen = {};
+  liste.forEach(l=>{(gruppen[l.gruppe]=gruppen[l.gruppe]||[]).push(l)});
+  let html = `<h2>🧑‍🏫 Für dich als Lehrkraft · ${k}. Klasse</h2><p class="hinweis">Diese Prompts sind für dich zur Vorbereitung. Du fügst sie im <b>normalen Chat</b> von AIS.chat ein – nicht in ein Lernszenario.</p>`;
+  for(const g in gruppen){
+    html += `<h3 class="gruppe">${esc(g)}</h3><div class="liste">`+gruppen[g].map(l=>`
+      <a class="thema" href="${link({k,f:"lehrkraft",t:l.id})}"><div style="font-size:2rem">📝</div><div><div class="t">${esc(l.titel)}</div><div class="k">${esc(l.kurz)}</div></div></a>`).join("")+`</div>`;
+  }
+  app.innerHTML = html;
+}
+
+function viewLehrkraftDetail(k,id){
+  const l = LEHRKRAFT.find(x=>x.id===id);
+  if(!l){ app.innerHTML = "<p>Nicht gefunden.</p>"; return; }
+  feldNr = 0;
+  let html = `<a class="zurueck" href="${link({k,f:"lehrkraft"})}">← Zurück zur Übersicht</a>
+    <div class="kopf"><div style="font-size:3.5rem">📝</div><div><h2>${esc(l.titel)}</h2><div class="badges"><span class="badge">${esc(l.gruppe)}</span><span class="badge">${k}. Klasse</span><span class="badge lb">Normaler Chat</span></div><p>${esc(l.kurz)}</p>
+    <div class="tipp">🔒 Keine Namen oder persönlichen Daten von Kindern oder Eltern eingeben. Ergebnisse vor dem Einsatz prüfen.</div></div></div>`;
+  html += feldInfo("In AIS.chat", "Einen <b>neuen Chat</b> öffnen.");
+  html += feldInfo("Sprachmodell", esc(MODELLE[l.modell]));
+  html += feldKopie("Prompt", fill(l.prompt,null,k), {lang:true, hinweis:"Gelb markierte Stellen vor dem Absenden ersetzen."});
+  app.innerHTML = html;
+}
+
+function render(){
+  const r = route();
+  renderCrumbs(r);
+  if(!r.k) viewKlasse();
+  else if(!r.f) viewFach(r.k);
+  else if(!r.t) viewThemen(r.k,r.f);
+  else if(r.f==="lehrkraft") viewLehrkraftDetail(r.k,r.t);
+  else viewDetail(r.k,r.f,r.t,r.m);
+  window.scrollTo(0,0);
+}
+
+document.addEventListener("click", async e=>{
+  const b = e.target.closest("[data-copy]");
+  if(!b) return;
+  const text = document.getElementById(b.dataset.copy).innerText;
+  try{ await navigator.clipboard.writeText(text); }
+  catch(err){ const ta=document.createElement("textarea"); ta.value=text; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); }
+  const alt = b.innerHTML; b.innerHTML = "✓ Kopiert"; b.classList.add("ok");
+  setTimeout(()=>{b.innerHTML=alt; b.classList.remove("ok")},1600);
+});
+window.addEventListener("hashchange", render);
+render();
+</script>
+</body>
+</html>
