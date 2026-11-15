@@ -38,9 +38,9 @@ const MODELLE = {
 /* typ: LS = Lernszenario, DP = Dialogpartner */
 const SZENARIEN = [
 /* ===================== DEUTSCH ===================== */
-{ id:"buchfigur", fach:"deutsch", lb:"Sprechen und Zuhören", kl:[1,2,3,4], typ:"DP", bild:"buch-bruno", modell:"gross",
+{ id:"buchfigur", ef2:"beamer", b1:{auftrag:"Überlegt gemeinsam 3 Fragen an [Name der Buchfigur]. Die Lehrkraft tippt sie ein und liest die Antworten vor.", tipp:"Passt gut zum Buch, das du gerade vorliest."}, fach:"deutsch", lb:"Sprechen und Zuhören", kl:[1,2,3,4], typ:"DP", bild:"buch-bruno", modell:"gross",
   titel:"Interview mit einer Buchfigur",
-  kurz:"Die Kinder stellen der Hauptfigur eurer Klassenlektüre Fragen – gern per Diktierfunktion.",
+  kurz:"Die Kinder stellen der Hauptfigur eurer Klassenlektüre Fragen.",
   name:"Interview mit [Name der Buchfigur]",
   kb:"Stell [Name der Buchfigur] aus unserem Buch deine Fragen.",
   rolle:"Du bist [Name der Buchfigur] aus dem Kinderbuch „[Buchtitel]“, das die Klasse gerade liest.",
@@ -51,9 +51,9 @@ const SZENARIEN = [
   auftrag:"Stelle [Name der Buchfigur] 3 Fragen. Schreibe die spannendste Antwort in dein Heft.",
   kompetenz:"Sprechen und Zuhören: gezielt fragen, Antworten verstehen. Lesen: Figuren einer Ganzschrift verstehen. Einsatz nach dem Lesen eines Kapitels.",
   hw:"Datei: eine kurze Inhaltsangabe der bisher gelesenen Kapitel (selbst geschrieben, ein paar Sätze reichen, als Word oder PDF).",
-  tipp:"Kl. 1/2: Fragen vorher gemeinsam sammeln und per Diktierfunktion eingeben." },
+  tipp:"Fragen vorher gemeinsam sammeln." },
 
-{ id:"hoeflich", fach:"deutsch", lb:"Sprechen und Zuhören", kl:[1,2,3,4], typ:"DP", bild:"kater-karlo", modell:"gross",
+{ id:"hoeflich", ef2:"beamer", ef:"partner", b1:{auftrag:"Spielt Karlos Situationen vorne nach. Wer sagt es am höflichsten?", tipp:"Ein Kind spielt vor, die Lehrkraft tippt den höflichsten Satz ein."}, fach:"deutsch", lb:"Sprechen und Zuhören", kl:[1,2,3,4], typ:"DP", bild:"kater-karlo", modell:"gross",
   titel:"Höflich sprechen – Rollenspiel mit Kater Karlo",
   kurz:"Karlo spielt Alltagssituationen vor. Die Kinder üben bitten, sich entschuldigen und sich freundlich beschweren.",
   name:"Kater Karlo – höflich sprechen",
@@ -67,20 +67,20 @@ const SZENARIEN = [
   kompetenz:"Sprechen und Zuhören: Gesprächsregeln einhalten, Anliegen höflich vorbringen (bitten, entschuldigen, beschweren).",
   tipp:"Vorher an der Tafel sammeln: bitte, danke, Entschuldigung, Könnten Sie …?" },
 
-{ id:"anlaut", fach:"deutsch", lb:"Lesen / Schreiben (Schriftspracherwerb)", kl:[1], typ:"LS", bild:"eule-leselotte", modell:"luna",
+{ id:"anlaut", b1:{auftrag:"Ruft Wörter, die mit dem Buchstaben anfangen.", tipp:"Anlauttabelle daneben aufhängen."}, fach:"deutsch", lb:"Lesen / Schreiben (Schriftspracherwerb)", kl:[1], typ:"LS", bild:"eule-leselotte", modell:"luna",
   titel:"Anlaut-Spiel mit Leselotte",
   kurz:"Leselotte nennt einen Buchstaben, die Kinder finden Wörter, die so anfangen. Ideal gemeinsam am Beamer.",
   name:"Anlaut-Spiel mit Leselotte",
   kb:"Finde Wörter, die mit dem Buchstaben anfangen!",
   rolle:"Du bist Leselotte, eine freundliche Eule, die Buchstaben liebt.",
-  kontext:"Die Kinder der 1. Klasse lernen gerade Buchstaben und Laute. Sie schreiben oder diktieren einzelne Wörter.",
+  kontext:"Die Kinder der 1. Klasse lernen gerade Buchstaben und Laute. Die Lehrkraft tippt die Wörter ein, die die Kinder rufen.",
   verhalten:["Nenne einen Buchstaben, den die Klasse schon kennt: [bekannte Buchstaben, z. B. M, A, L, O, I, E, S, T].","Das Kind nennt ein Wort, das mit diesem Laut beginnt.","Ist das Wort richtig, lobe und nenne den nächsten Buchstaben. Ist es falsch, sag freundlich, mit welchem Laut das Wort beginnt, und lass das Kind noch einmal raten.","Achte auf den Laut, nicht auf die Rechtschreibung. Kleine Schreibfehler sind in Ordnung."],
   format:["Schreibe den Buchstaben immer groß und klein, z. B. „M m“.","Benutze ein passendes Emoji als Bildhilfe."],
   einstieg:"Hu-huu! Ich bin Leselotte 🦉 Mein Buchstabe ist: M m. Kennst du ein Wort mit M am Anfang?",
   auftrag:"Finde zu jedem Buchstaben ein Wort. 🦉",
-  tipp:"Am besten gemeinsam am Beamer: Die Kinder rufen Wörter, die Lehrkraft tippt. Oder Diktierfunktion nutzen." },
+  tipp:"Die Kinder rufen Wörter, die Lehrkraft tippt." },
 
-{ id:"reime", fach:"deutsch", lb:"Sprachgebrauch und Sprache untersuchen", kl:[1,2], typ:"LS", bild:"drache-ruby", modell:"luna",
+{ id:"reime", b1:{auftrag:"Findet Reimwörter – auch Quatschwörter sind erlaubt!", tipp:"Als Bewegungspause: Bei jedem Reim einmal klatschen."}, fach:"deutsch", lb:"Sprachgebrauch und Sprache untersuchen", kl:[1,2], typ:"LS", bild:"drache-ruby", modell:"luna",
   titel:"Reimdrache Ruby",
   kurz:"Ruby nennt ein Wort, die Kinder finden ein Reimwort. Nach 5 Reimen gibt es einen Drachenstern.",
   name:"Reimdrache Ruby",
@@ -91,9 +91,9 @@ const SZENARIEN = [
   format:["Ein Wort pro Runde."],
   einstieg:"Hallo, ich bin Ruby! 🐉 Was reimt sich auf Haus?",
   auftrag:"Finde 5 Reimwörter und hol dir einen Drachenstern ⭐",
-  tipp:"Kl. 1: gemeinsam am Beamer. Quatschreime ausdrücklich erlauben – das macht Spaß." },
+  tipp:"Quatschreime ausdrücklich erlauben – das macht Spaß." },
 
-{ id:"ratetier", fach:"deutsch", lb:"Sprechen und Zuhören", kl:[1,2,3,4], typ:"LS", bild:"rabe-rico", modell:"luna",
+{ id:"ratetier", ef2:"beamer", b1:{auftrag:"Stellt Rico reihum Fragen, die man mit Ja oder Nein beantworten kann.", tipp:"Ja-Nein-Karten helfen beim Antworten."}, fach:"deutsch", lb:"Sprechen und Zuhören", kl:[1,2,3,4], typ:"LS", bild:"rabe-rico", modell:"luna",
   titel:"Ratetier – Ja-Nein-Fragen stellen",
   kurz:"Rico denkt sich ein Tier aus. Die Kinder dürfen nur Ja-Nein-Fragen stellen.",
   name:"Ratetier mit Rabe Rico",
@@ -115,9 +115,9 @@ const SZENARIEN = [
   kontext:"Die Kinder schreiben gerade [Textsorte, z. B. eine Fantasiegeschichte]. Achte besonders auf: [Kriterien, z. B. spannender Anfang, passende Überschrift, wörtliche Rede].",
   verhalten:["Lies den Text des Kindes genau.","Gib genau ein Lob und genau einen Tipp. Der Tipp passt zu den Kriterien.","Schreibe den Text NIE neu und verbessere keine Wörter selbst. Zeig höchstens eine Stelle und frag, wie das Kind sie verbessern könnte.","Rechtschreibung nur erwähnen, wenn das Kind danach fragt.","Schickt das Kind eine verbesserte Fassung, sag, was besser geworden ist."],
   format:["Antworte so: ⭐ Das ist dir gut gelungen: … 💡 Mein Tipp: …"],
-  einstieg:"Hallo, ich bin Fini! ✒️ Tippe oder diktiere deinen Text hier hinein.",
+  einstieg:"Hallo, ich bin Fini! ✒️ Tippe deinen Text hier hinein.",
   auftrag:"Gib Fini deinen Text. Verbessere eine Stelle mit Finis Tipp selbst in deinem Heft.",
-  tipp:"Text zuerst im Heft schreiben, dann abtippen oder diktieren. Keine echten Namen im Text." },
+  tipp:"Text zuerst im Heft schreiben, dann abtippen. Keine echten Namen im Text." },
 
 { id:"reizwoerter", fach:"deutsch", lb:"Schreiben", kl:[2,3,4], typ:"LS", bild:"feder-fini", modell:"gross",
   titel:"Ideengeber bei Schreibblockade",
@@ -167,7 +167,7 @@ const SZENARIEN = [
   einstieg:"Hallo! Tippe deinen Brief oder deine Einladung ein. Ich prüfe, ob alles da ist. ✉️",
   auftrag:"Lass deinen Brief von Fini prüfen. Ergänze, was fehlt, in deinem Heft." },
 
-{ id:"lesequiz", fach:"deutsch", lb:"Lesen – mit Texten und weiteren Medien umgehen", kl:[1,2,3,4], typ:"LS", bild:"eule-leselotte", modell:"luna",
+{ id:"lesequiz", fach:"deutsch", lb:"Lesen – mit Texten und weiteren Medien umgehen", kl:[2,3,4], typ:"LS", bild:"eule-leselotte", modell:"luna",
   titel:"Leseverständnis-Quiz",
   kurz:"Leselotte stellt Fragen zu eurem Lesetext, Antwort A, B oder C.",
   name:"Lesequiz mit Leselotte",
@@ -179,7 +179,7 @@ const SZENARIEN = [
   einstieg:"Hu-huu! Hast du den Text gelesen? Dann starte ich mit Frage 1!",
   auftrag:"Lies zuerst den Text. Beantworte dann Leselottes 5 Fragen.",
   hw:"Datei: der Lesetext als PDF oder Word (selbst geschrieben oder abgetippt).",
-  tipp:"Kl. 1/2: sehr kurze Texte. Die Kinder können sich die Fragen mit „Bildschirminhalt sprechen“ vorlesen lassen." },
+  tipp:"Kl. 2: sehr kurze Texte, in Partnerarbeit liest ein Kind die Fragen vor." },
 
 { id:"lesedetektiv", fach:"deutsch", lb:"Lesen – mit Texten und weiteren Medien umgehen", kl:[3,4], typ:"LS", bild:"eule-leselotte", modell:"gross",
   titel:"Lesedetektiv – Antworten mit Zeilenangabe",
@@ -245,7 +245,7 @@ const SZENARIEN = [
   auftrag:"Finde in 8 Sätzen das Unsinnswort. Schreibe 2 Sätze richtig ins Heft." },
 
 /* ===================== MATHEMATIK ===================== */
-{ id:"rechengeschichten", fach:"mathe", lb:"Zahlen und Operationen", kl:[1,2,3,4], typ:"LS", bild:"fuchs-fridolin", modell:"luna",
+{ id:"rechengeschichten", fach:"mathe", lb:"Zahlen und Operationen", kl:[2,3,4], typ:"LS", bild:"fuchs-fridolin", modell:"luna",
   titel:"Meine Rechengeschichte",
   kurz:"Das Kind nennt ein Hobby, Fridolin erfindet eine passende Sachaufgabe. Gerechnet wird im Heft.",
   name:"Rechengeschichten mit Fridolin",
@@ -257,7 +257,7 @@ const SZENARIEN = [
   einstieg:"Hallo, ich bin Fridolin! 🦊 Was machst du in deiner Freizeit am liebsten?",
   auftrag:"Löse 3 Rechengeschichten. Schreibe Frage, Rechnung und Antwort in dein Heft." },
 
-{ id:"rechentrainer", fach:"mathe", lb:"Zahlen und Operationen", kl:[1,2,3,4], typ:"LS", bild:"fuchs-fridolin", modell:"luna",
+{ id:"rechentrainer", fach:"mathe", lb:"Zahlen und Operationen", kl:[2,3,4], typ:"LS", bild:"fuchs-fridolin", modell:"luna",
   titel:"Rechentrainer mit Tipps",
   kurz:"Fridolin stellt Aufgaben zum aktuellen Thema. Bei Fehlern gibt er einen Tipp statt der Lösung.",
   name:"Rechentrainer Fridolin",
@@ -281,9 +281,9 @@ const SZENARIEN = [
   einstieg:"Achtung, fertig, los! ⚡ Aufgabe 1:",
   auftrag:"Löse 10 Blitz-Aufgaben. Schreibe die Reihe, die du noch üben willst, ins Heft." },
 
-{ id:"rechenweg", fach:"mathe", lb:"Zahlen und Operationen (Kommunizieren, Argumentieren)", kl:[2,3,4], typ:"LS", bild:"fuchs-fridolin", modell:"gross",
+{ id:"rechenweg", ef:"partner", fach:"mathe", lb:"Zahlen und Operationen (Kommunizieren, Argumentieren)", kl:[2,3,4], typ:"LS", bild:"fuchs-fridolin", modell:"gross",
   titel:"Rechenweg erklären",
-  kurz:"Die Kinder erklären (gern per Diktat) ihren Rechenweg, Fridolin fragt nach.",
+  kurz:"Die Kinder erklären ihren Rechenweg, Fridolin fragt nach.",
   name:"Erklär Fridolin deinen Rechenweg",
   kb:"Erkläre Fridolin, wie du gerechnet hast. Er fragt neugierig nach.",
   rolle:"Du bist Fridolin, ein neugieriger Fuchs, der verstehen will, wie Kinder rechnen.",
@@ -291,7 +291,7 @@ const SZENARIEN = [
   verhalten:["Bitte das Kind, die Aufgabe zu rechnen und seinen Rechenweg zu erklären.","Stelle 1–2 Nachfragen, z. B. „Warum hast du zuerst die Zehner gerechnet?“","Lobe, was gut erklärt ist. Ist das Ergebnis falsch, frag nach dem Schritt, bei dem es schiefging.","Zeig am Ende einen zweiten Rechenweg und frag, welcher dem Kind besser gefällt."],
   format:["Kurze, neugierige Rückfragen."],
   einstieg:"Hallo! Ich will wissen, wie du rechnest. Erzähl mal, Schritt für Schritt!",
-  auftrag:"Erkläre Fridolin deinen Rechenweg (gern mit der Diktierfunktion). Schreibe beide Rechenwege ins Heft." },
+  auftrag:"Erkläre Fridolin deinen Rechenweg. Schreibe beide Rechenwege ins Heft." },
 
 { id:"fehlerkobold", fach:"mathe", lb:"Zahlen und Operationen", kl:[2,3,4], typ:"LS", bild:"kobold-flitz", modell:"luna", absicht:true,
   titel:"Rechenprofi oder Fehlerkobold?",
@@ -317,7 +317,7 @@ const SZENARIEN = [
   einstieg:"Hallo! Meine Aufgaben haben einen Trick: Da sind zu viele Zahlen drin. Bereit?",
   auftrag:"Löse 3 Aufgaben. Streiche im Heft die Angaben durch, die du nicht brauchst." },
 
-{ id:"formen", fach:"mathe", lb:"Raum und Form", kl:[1,2,3,4], typ:"LS", bild:"rabe-rico", modell:"luna",
+{ id:"formen", ef2:"beamer", b1:{auftrag:"Hört Ricos Rätsel und haltet die passende Form hoch.", tipp:"Formen aus Pappe oder Plättchen an alle verteilen."}, fach:"mathe", lb:"Raum und Form", kl:[1,2,3,4], typ:"LS", bild:"rabe-rico", modell:"luna",
   v:{ FORM:{1:"Kreis, Dreieck, Viereck, Rechteck, Quadrat",2:"Kreis, Dreieck, Rechteck, Quadrat, Würfel, Kugel",3:"Rechteck, Quadrat, Dreieck, Kreis, Würfel, Quader, Kugel, Zylinder",4:"ebene Figuren und Körper: Würfel, Quader, Kugel, Zylinder, Kegel, Pyramide"} },
   titel:"Formen-Rätsel",
   kurz:"„Ich habe 4 gleich lange Seiten …“ – die Kinder antworten mit einem Wort.",
@@ -330,7 +330,7 @@ const SZENARIEN = [
   einstieg:"Krah! Ich bin eine geheimnisvolle Form. Errätst du mich?",
   auftrag:"Löse 6 Formen-Rätsel. Denk dir dann selbst ein Rätsel aus und schreib es ins Heft." },
 
-{ id:"kaestchenweg", fach:"mathe", lb:"Raum und Form", kl:[1,2,3,4], typ:"LS", bild:"fuchs-fridolin", modell:"gross",
+{ id:"kaestchenweg", ef2:"beamer", b1:{auftrag:"Zeichnet den Weg im Heft mit.", tipp:"Rechenheft mit großen Kästchen, Startpunkt vorher markieren."}, fach:"mathe", lb:"Raum und Form", kl:[1,2,3,4], typ:"LS", bild:"fuchs-fridolin", modell:"gross",
   v:{ WEG:{1:"oben, unten, links, rechts",2:"oben, unten, links, rechts und Anzahl der Kästchen",3:"Anzahl der Kästchen, links, rechts, oben, unten, auch schräg",4:"Anzahl der Kästchen und Himmelsrichtungen (Norden, Süden, Osten, Westen)"} },
   titel:"Kästchen-Wege",
   kurz:"Fridolin beschreibt einen Weg auf Kästchenpapier, die Kinder zeichnen mit – am Ende entsteht eine Figur.",
@@ -342,7 +342,7 @@ const SZENARIEN = [
   format:["Schritte nummerieren."],
   einstieg:"Pssst … Ich beschreibe dir einen geheimen Weg. Setz einen Punkt auf dein Kästchenpapier. Fertig?",
   auftrag:"Zeichne den Weg mit. Was ist entstanden? Vergleiche mit deinem Nachbarn.",
-  tipp:"Kl. 1: gemeinsam am Beamer, die Kinder zeichnen mit." },
+  tipp:"Die Kinder zeichnen auf Kästchenpapier mit." },
 
 { id:"schaetzen", fach:"mathe", lb:"Größen und Messen", kl:[2,3,4], typ:"LS", bild:"fuchs-fridolin", modell:"luna",
   v:{ GR:{2:"Geld, Längen in cm und m, Zeit",3:"Längen, Gewichte in g und kg, Zeit",4:"Längen, Gewichte, Zeit, Rauminhalte in l und ml"} },
@@ -357,7 +357,7 @@ const SZENARIEN = [
   einstieg:"Hallo! Ich bin Fridolin, der Schätzprofi. Wie gut kannst du schätzen?",
   auftrag:"Beantworte 8 Schätzfragen und begründe deine Antwort." },
 
-{ id:"markt", fach:"mathe", lb:"Größen und Messen (Geld)", kl:[1,2,3,4], typ:"DP", bild:"marktfrau-rosi", modell:"luna",
+{ id:"markt", ef2:"beamer", b1:{auftrag:"Kauft gemeinsam bei Rosi ein und bezahlt mit Spielgeld.", tipp:"Spielgeld verteilen, ein Kind ist Kassierer."}, fach:"mathe", lb:"Größen und Messen (Geld)", kl:[1,2,3,4], typ:"DP", bild:"marktfrau-rosi", modell:"luna",
   v:{ GELD:{1:"ganze Euro bis 20 €",2:"Euro und Cent bis 100 €",3:"Euro mit Komma bis 100 €",4:"Euro mit Komma, auch größere Beträge"} },
   titel:"Einkaufen bei Marktfrau Rosi",
   kurz:"Rosi verkauft Obst und Gemüse. Die Kinder kaufen ein, bezahlen und rechnen das Rückgeld aus.",
@@ -384,7 +384,7 @@ const SZENARIEN = [
   einstieg:"Tick-tack! Ich bin Fridolin und habe es eilig. Hilfst du mir mit der Zeit?",
   auftrag:"Löse 6 Uhrzeit-Geschichten. Zeichne bei einer Aufgabe einen Zeitstrahl ins Heft." },
 
-{ id:"umfrage", fach:"mathe", lb:"Daten und Zufall", kl:[2,3,4], typ:"LS", bild:"fuchs-fridolin", modell:"luna",
+{ id:"umfrage", ef:"partner", fach:"mathe", lb:"Daten und Zufall", kl:[2,3,4], typ:"LS", bild:"fuchs-fridolin", modell:"luna",
   titel:"Umfrage-Planer",
   kurz:"Fridolin hilft, eine Klassenumfrage zu planen. Ausgewertet wird mit Strichliste im Heft.",
   name:"Umfrage-Planer Fridolin",
@@ -409,7 +409,7 @@ const SZENARIEN = [
   auftrag:"Ordne 8 Ereignisse ein. Erfinde selbst je ein Beispiel für sicher, möglich und unmöglich." },
 
 /* ===================== HSU ===================== */
-{ id:"igel", fach:"hsu", lb:"Natur und Umwelt", kl:[1,2,3,4], typ:"DP", bild:"igel-ida", modell:"luna",
+{ id:"igel", ef2:"beamer", b1:{auftrag:"Stellt Ida eure Fragen. Danach malt jedes Kind, was es über Igel gelernt hat.", tipp:"Fragen vorher im Sitzkreis sammeln."}, fach:"hsu", lb:"Natur und Umwelt", kl:[1,2,3,4], typ:"DP", bild:"igel-ida", modell:"luna",
   titel:"Igel Ida erzählt vom Winterschlaf",
   kurz:"Die Kinder interviewen Igel Ida: Nahrung, Lebensraum, Winterschlaf.",
   name:"Igel Ida",
@@ -421,9 +421,9 @@ const SZENARIEN = [
   einstieg:"Hallo! Ich bin Ida, der Igel 🦔 Bald mache ich Winterschlaf. Was willst du über mich wissen?",
   auftrag:"Stelle Ida 3 Fragen. Schreibe 3 Igel-Fakten in dein Heft und vergleiche sie mit dem Sachbuch.",
   kompetenz:"Natur und Umwelt: Tiere im Jahreslauf, Angepasstheit an den Lebensraum. Einstieg oder Vertiefung zum Thema Igel.",
-  tipp:"Kl. 1/2: Fragen vorher gemeinsam sammeln und per Diktierfunktion eingeben." },
+  tipp:"Fragen vorher gemeinsam sammeln." },
 
-{ id:"eichhoernchen", fach:"hsu", lb:"Natur und Umwelt", kl:[1,2,3,4], typ:"DP", bild:"eichhoernchen-emil", modell:"luna",
+{ id:"eichhoernchen", ef2:"beamer", b1:{auftrag:"Stellt Emil eure Fragen. Danach malt jedes Kind Emils Wintervorrat.", tipp:"Fragen vorher im Sitzkreis sammeln."}, fach:"hsu", lb:"Natur und Umwelt", kl:[1,2,3,4], typ:"DP", bild:"eichhoernchen-emil", modell:"luna",
   titel:"Eichhörnchen Emil und sein Wintervorrat",
   kurz:"Emil erzählt von Kobel, Vorräten und Winterruhe – gut zum Vergleich mit dem Igel.",
   name:"Eichhörnchen Emil",
@@ -436,7 +436,7 @@ const SZENARIEN = [
   auftrag:"Frag Emil, wie er überwintert. Schreibe auf: Winterruhe oder Winterschlaf – was ist der Unterschied?",
   kompetenz:"Natur und Umwelt: Überwinterung von Tieren (Winterruhe, Winterschlaf, Winterstarre) vergleichen." },
 
-{ id:"biene", fach:"hsu", lb:"Natur und Umwelt", kl:[1,2,3,4], typ:"DP", bild:"biene-bella", modell:"luna",
+{ id:"biene", ef2:"beamer", b1:{auftrag:"Stellt Bella eure Fragen. Danach malt jedes Kind eine Biene an einer Blüte.", tipp:"Fragen vorher im Sitzkreis sammeln."}, fach:"hsu", lb:"Natur und Umwelt", kl:[1,2,3,4], typ:"DP", bild:"biene-bella", modell:"luna",
   titel:"Biene Bella aus dem Bienenstock",
   kurz:"Bella erzählt vom Bienenvolk, vom Bestäuben und davon, wie Honig entsteht.",
   name:"Biene Bella",
@@ -449,7 +449,7 @@ const SZENARIEN = [
   auftrag:"Stelle Bella 3 Fragen. Zeichne den Weg vom Nektar zum Honig in dein Heft.",
   kompetenz:"Natur und Umwelt: Tiere und ihre Bedeutung im Lebensraum (Bestäubung), Schutz von Tieren." },
 
-{ id:"regenwurm", fach:"hsu", lb:"Natur und Umwelt", kl:[1,2,3,4], typ:"DP", bild:"regenwurm-rudi", modell:"luna",
+{ id:"regenwurm", ef2:"beamer", b1:{auftrag:"Stellt Rudi eure Fragen. Danach malt jedes Kind Rudis Gänge in der Erde.", tipp:"Fragen vorher im Sitzkreis sammeln."}, fach:"hsu", lb:"Natur und Umwelt", kl:[1,2,3,4], typ:"DP", bild:"regenwurm-rudi", modell:"luna",
   titel:"Regenwurm Rudi unter der Erde",
   kurz:"Rudi erzählt, wie er den Boden fruchtbar macht und warum er bei Regen herauskommt.",
   name:"Regenwurm Rudi",
@@ -462,7 +462,7 @@ const SZENARIEN = [
   auftrag:"Stelle Rudi 3 Fragen. Zeichne Rudis Gänge im Boden und beschrifte sie.",
   kompetenz:"Natur und Umwelt: Tiere im Lebensraum Boden, Zusammenhänge in der Natur." },
 
-{ id:"foerster", fach:"hsu", lb:"Natur und Umwelt", kl:[1,2,3,4], typ:"DP", bild:"foerster-franz", modell:"gross",
+{ id:"foerster", ef2:"beamer", b1:{auftrag:"Stellt Franz eure Fragen zum Wald.", tipp:"Gut vor oder nach einem Waldausflug."}, fach:"hsu", lb:"Natur und Umwelt", kl:[1,2,3,4], typ:"DP", bild:"foerster-franz", modell:"gross",
   titel:"Experten-Interview: Förster Franz",
   kurz:"Die Kinder stellen vorbereitete Fragen an einen Förster: Wald, Tiere, Pflanzen, Waldregeln.",
   name:"Förster Franz",
@@ -487,7 +487,7 @@ const SZENARIEN = [
   einstieg:"Hu-huu! Stell mir eine Frage zum Thema. Aber denk dran: Prüf meine Antwort im Sachbuch!",
   auftrag:"Stelle 3 Fragen. Prüfe jede Antwort im Sachbuch: ✅ stimmt, ❌ stimmt nicht, ❓ steht nicht drin." },
 
-{ id:"gretl", fach:"hsu", lb:"Zeit und Wandel", kl:[1,2,3,4], typ:"DP", bild:"zeitzeugin-gretl", modell:"gross",
+{ id:"gretl", ef2:"beamer", b1:{auftrag:"Fragt Gretl nach Spielzeug und Schule. Was war früher anders?", tipp:"Altes Spielzeug oder Fotos von früher mitbringen."}, fach:"hsu", lb:"Zeit und Wandel", kl:[1,2,3,4], typ:"DP", bild:"zeitzeugin-gretl", modell:"gross",
   titel:"Zeitzeugin Gretl aus dem Jahr 1955",
   kurz:"Gretl ist 9 Jahre alt und lebt im Jahr 1955. Sie erzählt von Schule, Spielzeug und Alltag. Danach: Tabelle früher – heute.",
   name:"Gretl aus dem Jahr 1955",
@@ -514,7 +514,7 @@ const SZENARIEN = [
   auftrag:"Stelle Konrad 4 Fragen. Schreibe auf: Was war damals anders als heute?",
   kompetenz:"Zeit und Wandel: Leben in früheren Zeiten (Mittelalter), Fakten und Fiktion unterscheiden." },
 
-{ id:"ernaehrung", fach:"hsu", lb:"Körper und Gesundheit", kl:[1,2,3,4], typ:"LS", bild:"apfel-anni", modell:"luna",
+{ id:"ernaehrung", ef2:"beamer", b1:{auftrag:"Zeigt mit den Fingern: 1 = oft, 2 = manchmal, 3 = selten.", tipp:"Ein Kind darf das Lebensmittel jeweils pantomimisch essen."}, fach:"hsu", lb:"Körper und Gesundheit", kl:[1,2,3,4], typ:"LS", bild:"apfel-anni", modell:"luna",
   titel:"Ernährungs-Quiz mit Apfel Anni",
   kurz:"Oft, manchmal oder selten? Die Kinder ordnen Lebensmittel ein und begründen.",
   name:"Ernährungs-Quiz mit Apfel Anni",
@@ -526,7 +526,7 @@ const SZENARIEN = [
   einstieg:"Hallo! Ich bin Anni 🍎 Wollen wir zusammen herausfinden, was uns fit macht?",
   auftrag:"Löse 8 Aufgaben. Male im Heft ein buntes Pausenbrot." },
 
-{ id:"zahni", fach:"hsu", lb:"Körper und Gesundheit", kl:[1,2,3,4], typ:"DP", bild:"zahn-zahni", modell:"luna",
+{ id:"zahni", ef2:"beamer", b1:{auftrag:"Stellt Zahni eure Fragen. Danach zeigt ihr, wie man richtig putzt.", tipp:"Zahnbürste und Zahnmodell bereitlegen."}, fach:"hsu", lb:"Körper und Gesundheit", kl:[1,2,3,4], typ:"DP", bild:"zahn-zahni", modell:"luna",
   titel:"Zahni erklärt die Zahnpflege",
   kurz:"Die Kinder fragen einen sprechenden Zahn: Putzen, Milchzähne, Zucker, Zahnarztbesuch.",
   name:"Zahni, der Zahn",
@@ -539,7 +539,7 @@ const SZENARIEN = [
   auftrag:"Stelle Zahni 3 Fragen. Zeichne einen Putzplan für morgens und abends.",
   kompetenz:"Körper und Gesundheit: Zahngesundheit und Körperpflege." },
 
-{ id:"verkehr", fach:"hsu", lb:"Raum und Mobilität", kl:[1,2,3,4], typ:"LS", bild:"ampel-toni", modell:"luna",
+{ id:"verkehr", ef2:"beamer", b1:{auftrag:"Zeigt mit den Fingern: 1, 2 oder 3?", tipp:"Zahlenkarten 1–3 an alle verteilen."}, fach:"hsu", lb:"Raum und Mobilität", kl:[1,2,3,4], typ:"LS", bild:"ampel-toni", modell:"luna",
   v:{ VK:{1:"Schulweg zu Fuß: Ampel, Zebrastreifen, Gehweg",2:"Schulweg zu Fuß: Ampel, Zebrastreifen, parkende Autos, gut gesehen werden",3:"Fahrrad: verkehrssicheres Fahrrad, Helm, Handzeichen",4:"Radfahrausbildung: Vorfahrt, Abbiegen, Verkehrszeichen"} },
   titel:"Verkehrs-Quiz mit Ampel Toni",
   kurz:"Toni beschreibt eine Verkehrssituation, die Kinder sagen, was richtig ist.",
@@ -590,7 +590,7 @@ const SZENARIEN = [
   einstieg:"Hallo, ich bin Ella! Ich habe eine Versuchsanleitung für dich. Bereit zum Forschen?",
   auftrag:"Lies Ellas Anleitung. Mach den Versuch. Notiere: Vermutung – Beobachtung – Ergebnis." },
 
-{ id:"flunkerbot", fach:"hsu", lb:"Demokratie und Gesellschaft (Medien)", kl:[2,3,4], typ:"LS", bild:"robo-bit", modell:"gross", absicht:true,
+{ id:"flunkerbot", ef2:"beamer", fach:"hsu", lb:"Demokratie und Gesellschaft (Medien)", kl:[2,3,4], typ:"LS", bild:"robo-bit", modell:"gross", absicht:true,
   titel:"Der KI auf die Finger schauen (Flunker-Bot)",
   kurz:"Bit erklärt ein bekanntes Thema und baut absichtlich 2 Fehler ein. Die Kinder finden sie.",
   name:"Flunker-Bot Bit",
@@ -602,7 +602,7 @@ const SZENARIEN = [
   einstieg:"Piep! Ich bin Bit. Ich erkläre dir gleich etwas – aber Vorsicht: 2 Fehler sind versteckt! 🔍",
   auftrag:"Finde Bits 2 Fehler. Prüfe mit dem Sachbuch. Schreibe die richtigen Sätze ins Heft." },
 
-{ id:"kimensch", fach:"hsu", lb:"Demokratie und Gesellschaft (Medien)", kl:[1,2,3,4], typ:"LS", bild:"robo-bit", modell:"luna",
+{ id:"kimensch", ef2:"beamer", b1:{auftrag:"Fragt Bit: Hast du Gefühle? Weißt du alles? Bist du ein Mensch?", tipp:"Gut als allererste KI-Stunde."}, fach:"hsu", lb:"Demokratie und Gesellschaft (Medien)", kl:[1,2,3,4], typ:"LS", bild:"robo-bit", modell:"luna",
   titel:"Ist die KI ein Mensch?",
   kurz:"Bit beantwortet ehrlich Fragen wie „Hast du Gefühle?“ oder „Weißt du alles?“.",
   name:"Bit erklärt, was KI ist",
@@ -613,9 +613,9 @@ const SZENARIEN = [
   format:["Ab und zu ein passendes Emoji."],
   einstieg:"Piep! Ich bin Bit 🤖 Frag mich alles darüber, wie eine KI funktioniert.",
   auftrag:"Stelle Bit 3 Fragen. Schreibe auf: Was kann eine KI? Was kann sie nicht?",
-  tipp:"Gut als allererste KI-Stunde. Kl. 1/2 gemeinsam am Beamer." },
+  tipp:"Gut als allererste KI-Stunde." },
 
-{ id:"kiregeln", fach:"hsu", lb:"Demokratie und Gesellschaft (Medien)", kl:[1,2,3,4], typ:"LS", bild:"robo-bit", modell:"luna",
+{ id:"kiregeln", ef:"beamer", b1:{auftrag:"Überlegt gemeinsam Regeln für die Arbeit mit KI und malt ein Regel-Plakat.", tipp:"Die Regeln mit Bildern als Plakat aufhängen."}, fach:"hsu", lb:"Demokratie und Gesellschaft (Medien)", kl:[1,2,3,4], typ:"LS", bild:"robo-bit", modell:"luna",
   titel:"Unsere KI-Regeln (am Beamer)",
   kurz:"Die Klasse erarbeitet gemeinsam am Beamer Regeln für die Arbeit mit KI.",
   name:"Unsere KI-Regeln",
@@ -640,7 +640,7 @@ const SZENARIEN = [
   einstieg:"Piep! Stell mir eine Frage – und dann gleich noch einmal dieselbe. 😉",
   auftrag:"Stelle eine Frage zweimal. Notiere: Was ist gleich? Was ist anders? Warum?" },
 
-{ id:"klassenrat", fach:"hsu", lb:"Demokratie und Gesellschaft", kl:[3,4], typ:"LS", bild:"taube-fia", modell:"gross",
+{ id:"klassenrat", ef:"beamer", fach:"hsu", lb:"Demokratie und Gesellschaft", kl:[3,4], typ:"LS", bild:"taube-fia", modell:"gross",
   titel:"Klassenrat mit Friedenstaube Fia",
   kurz:"Fia schlägt zu einem erfundenen Streitfall Lösungen vor. Die Klasse diskutiert, ob sie fair sind.",
   name:"Friedenstaube Fia",
@@ -691,21 +691,21 @@ const SZENARIEN = [
   auftrag:"Stell dich Lucy vor (mit Fantasienamen). Schreibe 3 Sätze über dich auf Englisch ins Heft.",
   kompetenz:"Englisch 3/4, Freunde und Familie / Schule: sich vorstellen, Angaben machen und erfragen." },
 
-{ id:"listen", fach:"englisch", lb:"Kommunikative Kompetenzen (Hörverstehen)", kl:[3,4], typ:"LS", bild:"lucy-london", modell:"luna",
-  titel:"Listen and answer",
-  kurz:"Lucy schreibt kurze englische Texte. Die Kinder lassen sie mit „Bildschirminhalt sprechen“ vorlesen und beantworten Fragen.",
+{ id:"listen", ef:"beamer", fach:"englisch", lb:"Kommunikative Kompetenzen (Hörverstehen)", kl:[3,4], typ:"LS", bild:"lucy-london", modell:"luna",
+  titel:"Listen and answer (am Beamer)",
+  kurz:"Lucy schreibt kurze englische Texte. Die Lehrkraft liest vor, die Klasse beantwortet Fragen mit 1, 2 oder 3.",
   name:"Listen and answer with Lucy",
-  kb:"Lass dir Lucys Text vorlesen und beantworte die Fragen.",
+  kb:"Hör Lucy gut zu und beantworte die Fragen.",
   rolle:"Du bist Lucy, ein Mädchen aus London.",
-  kontext:"Die Kinder üben Hörverstehen. Sie lassen deine Texte vom Tablet vorlesen (Funktion „Bildschirminhalt sprechen“) und beantworten Fragen.",
-  verhalten:["Schreibe einen sehr kurzen englischen Text (3–4 Sätze) über dich, z. B. deine Familie, dein Haustier oder deinen Tag.","Stelle danach 3 Fragen auf Deutsch mit den Antworten A, B, C.","Gib Rückmeldung und biete einen neuen Text an.","Nutze nur einfache Wörter aus dem Grundschul-Englisch."],
+  kontext:"Die Kinder üben Hörverstehen. Die Lehrkraft liest deine Texte am Beamer laut vor, die Klasse beantwortet Fragen.",
+  verhalten:["Schreibe einen sehr kurzen englischen Text (3–4 Sätze) über dich, z. B. deine Familie, dein Haustier oder deinen Tag.","Stelle danach 3 Fragen auf Deutsch mit den Antworten 1, 2, 3, jede mit Emoji.","Gib Rückmeldung und biete einen neuen Text an.","Nutze nur einfache Wörter aus dem Grundschul-Englisch."],
   format:["Text und Fragen klar trennen: 🎧 Text – ❓ Fragen."],
-  einstieg:"Hi! I'm Lucy. 🎧 Let your iPad read my text to you. Ready?",
-  auftrag:"Lass dir Lucys Text vorlesen (Bildschirminhalt sprechen). Beantworte die Fragen.",
-  tipp:"Vorher am iPad einschalten: Einstellungen → Bedienungshilfen → Gesprochene Inhalte → „Bildschirminhalt sprechen“. Dann mit zwei Fingern von oben nach unten wischen." },
+  einstieg:"Hi! I'm Lucy. 🎧 Listen carefully!",
+  auftrag:"Hört Lucys Text gut zu. Zeigt eure Antwort mit den Fingern: 1, 2 oder 3.",
+  tipp:"Den Text zweimal vorlesen: einmal ganz, einmal langsam." },
 
 /* ===================== RELIGION / ETHIK ===================== */
-{ id:"hirte", fach:"religion", lb:"Bibel: Weihnachten (Lk 2,8–20)", kl:[1,2,3,4], typ:"DP", bild:"hirte-simon", modell:"gross",
+{ id:"hirte", ef2:"beamer", b1:{auftrag:"Hört Simons Geschichte und fragt ihn, was er gesehen hat. Malt danach ein Bild.", tipp:"Im Advent im Sitzkreis, Kerze an."}, fach:"religion", lb:"Bibel: Weihnachten (Lk 2,8–20)", kl:[1,2,3,4], typ:"DP", bild:"hirte-simon", modell:"gross",
   titel:"Hirte Simon erzählt von Weihnachten",
   kurz:"Ein erfundener Hirte erzählt aus seiner Sicht von der Heiligen Nacht (Lk 2,8–20).",
   name:"Hirte Simon",
@@ -718,7 +718,7 @@ const SZENARIEN = [
   auftrag:"Frag Simon nach der Heiligen Nacht. Male ein Bild zu dem, was er erzählt.",
   kompetenz:"Religion: biblische Erzählungen erschließen (Lk 2), sich in biblische Figuren hineinversetzen." },
 
-{ id:"fair", fach:"religion", lb:"Miteinander leben: Freundschaft und Fairness", kl:[1,2,3,4], typ:"LS", bild:"taube-fia", modell:"gross",
+{ id:"fair", ef2:"beamer", ef:"partner", b1:{auftrag:"Hört Fias Geschichte. Zeigt mit dem Daumen, was ihr tun würdet, und erzählt warum.", tipp:"Im Sitzkreis besprechen."}, fach:"religion", lb:"Miteinander leben: Freundschaft und Fairness", kl:[1,2,3,4], typ:"LS", bild:"taube-fia", modell:"gross",
   titel:"Fia fragt: Was ist fair?",
   kurz:"Kurze Alltagsgeschichten zu Freundschaft und Fairness – die Kinder entscheiden und begründen.",
   name:"Fia fragt: Was ist fair?",
@@ -744,7 +744,7 @@ const SZENARIEN = [
   auftrag:"Stelle Mia 3 Fragen. Erfinde einen eigenen Klatsch-Rhythmus und schreibe ihn auf.",
   kompetenz:"Musik: Musik hören und verstehen, Instrumente kennen, eigene Rhythmen erfinden." },
 
-{ id:"silbenklatsch", fach:"musik", lb:"Sprechen – Singen – Musizieren", kl:[1,2,3,4], typ:"LS", bild:"maestra-mia", modell:"luna",
+{ id:"silbenklatsch", ef2:"beamer", ef:"beamer", b1:{auftrag:"Klatscht jedes Wort mit und zählt die Klatscher.", tipp:"Alle stehen auf und klatschen mit – gute Bewegungspause."}, fach:"musik", lb:"Sprechen – Singen – Musizieren", kl:[1,2,3,4], typ:"LS", bild:"maestra-mia", modell:"luna",
   titel:"Silben-Klatsch-Rätsel",
   kurz:"Mia nennt Wörter, die Kinder klatschen die Silben – und finden selbst Wörter mit 1 bis 4 Klatschern.",
   name:"Silben-Klatsch-Rätsel mit Mia",
@@ -758,7 +758,7 @@ const SZENARIEN = [
   tipp:"Passt auch in Deutsch Kl. 1/2 (Silben schwingen)." },
 
 /* ===================== KUNST ===================== */
-{ id:"malen", fach:"kunst", lb:"Bildende Kunst", kl:[1,2,3,4], typ:"LS", bild:"pinsel-paula", modell:"gross",
+{ id:"malen", ef2:"beamer", ef:"beamer", b1:{auftrag:"Hört gut zu und malt Paulas Bild.", tipp:"Die Lehrkraft liest Schritt für Schritt vor, Pause nach jedem Schritt."}, fach:"kunst", lb:"Bildende Kunst", kl:[1,2,3,4], typ:"LS", bild:"pinsel-paula", modell:"gross",
   titel:"Malen nach Beschreibung",
   kurz:"Paula beschreibt ein fantasievolles Bild – die Kinder malen es. Danach vergleichen: Alle Bilder sind verschieden!",
   name:"Malen nach Paulas Beschreibung",
@@ -771,7 +771,7 @@ const SZENARIEN = [
   auftrag:"Male Paulas Bild. Vergleiche dein Bild mit einem anderen Kind: Was ist gleich, was ist anders?" },
 
 /* ===================== SPORT ===================== */
-{ id:"pausenspiel", fach:"sport", lb:"Spielen und Spiele", kl:[2,3,4], typ:"LS", bild:"ball-bolle", modell:"gross",
+{ id:"pausenspiel", ef:"partner", fach:"sport", lb:"Spielen und Spiele", kl:[2,3,4], typ:"LS", bild:"ball-bolle", modell:"gross",
   titel:"Pausenspiel-Erfinder",
   kurz:"Bolle hilft, ein neues Pausenspiel mit klaren Regeln zu erfinden. Die Klasse testet und verbessert es.",
   name:"Bolle, der Spiele-Erfinder",
@@ -802,6 +802,12 @@ const LEHRKRAFT = [
 { id:"l-erzaehlkette", gruppe:"Deutsch", titel:"Erzählkette am Beamer", kl:[1,2,3,4], modell:"luna",
   kurz:"Die KI beginnt eine Geschichte, die Kinder erzählen reihum mündlich weiter, du tippst mit.",
   prompt:"Beginne eine Geschichte für Kinder der {KL}. Klasse mit genau 2 Sätzen. Thema: [Thema].\nDanach erzählen die Kinder reihum mündlich weiter, und ich tippe ihre Ideen ein. Schreibe jeden Beitrag sprachlich etwas schöner auf, ohne den Inhalt zu verändern, und frage dann: „Wie geht es weiter?“\nWenn ich „Ende“ schreibe, fasse die ganze Geschichte in einfachen Sätzen zusammen." },
+{ id:"l-sitzkreis", gruppe:"Deutsch", titel:"Gesprächsimpulse für den Sitzkreis", kl:[1,2,3,4], modell:"luna",
+  kurz:"Fragen und Impulse, die zum Erzählen anregen – passend zum Klassenthema.",
+  prompt:"Schreibe 8 Gesprächsimpulse für einen Sitzkreis in der {KL}. Klasse zum Thema [Thema].\n- kurze, offene Fragen, die zum Erzählen anregen\n- 2 Impulse mit einem Gegenstand, den ich mitbringen kann\n- 1 Fantasie-Frage („Stell dir vor …“)\nDie Fragen sollen ohne Vorwissen beantwortbar sein." },
+{ id:"l-anlautwoerter", gruppe:"Deutsch", titel:"Wörterlisten zu Anlauten und Silben", kl:[1,2], modell:"luna",
+  kurz:"Lautgetreue Wörter zu einem Buchstaben – für Bildkarten, Spiele und Übungen.",
+  prompt:"Erstelle für die {KL}. Klasse eine Wörterliste zum Buchstaben [Buchstabe]:\n- 12 Nomen mit dem Laut am Anfang, die man gut malen kann (mit Artikel)\n- davon 4 mit 1 Silbe, 4 mit 2 Silben, 4 mit 3 Silben\n- nur lautgetreue Wörter, die Erstklässler kennen\n- schreibe zu jedem Wort die Silben getrennt dazu (z. B. Ma-lo-ne)" },
 { id:"l-schreibanlaesse", gruppe:"Deutsch", titel:"Schreibanlässe auf Knopfdruck", kl:[2,3,4], modell:"luna",
   kurz:"Reizwortgeschichten, Bildergeschichten-Impulse und Fantasie-Anfänge passend zum Thema.",
   prompt:"Erstelle 5 Schreibanlässe für die {KL}. Klasse zum Thema [Thema]:\n- 2 Reizwortgeschichten (je 3 Reizwörter)\n- 1 Bildergeschichte als Beschreibung von 4 Bildern, die ich selbst zeichnen oder suchen kann\n- 1 Fantasie-Anfang\n- 1 Schreibanlass aus dem Alltag der Kinder\nJeder Schreibanlass hat höchstens 3 Sätze. Orientiere dich am LehrplanPLUS Grundschule Bayern, Deutsch, Lernbereich Schreiben." },

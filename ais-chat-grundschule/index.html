@@ -55,6 +55,14 @@
   .badge.ls{background:#e3f4ea;color:#1b6b3d}
   .badge.dp{background:#fde8d7;color:#9a4a12}
   .badge.lb{background:#eef0fb;color:#3c4a8a}
+  .badge.beamer{background:#fff1b8;color:#6b4e00}
+  .badge.partner{background:#e1f0fb;color:#1f5f8b}
+  .badge.einzel{background:#efe9f8;color:#45237a}
+  .filter{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 6px}
+  .filter a{border:2px solid var(--rand);background:#fff;border-radius:999px;padding:6px 14px;text-decoration:none;color:var(--grau);font-weight:600;font-size:.92rem}
+  .filter a.an{background:var(--lila);border-color:var(--lila);color:#fff}
+  .banner{background:#fff8e1;border:2px solid #f3df9b;border-radius:var(--radius);padding:14px 18px;margin:0 0 18px}
+  .banner b{color:#6b4e00}
   .kopf{display:flex;gap:20px;align-items:center;background:#fff;border:2px solid var(--rand);border-radius:var(--radius);padding:18px}
   .kopf img{width:120px;height:120px;border-radius:50%;flex:0 0 120px}
   .kopf h2{margin:0 0 4px}
@@ -97,7 +105,7 @@
         <summary>So geht's in 5 Schritten</summary>
         <div class="inhalt">
           <ol>
-            <li>AIS.chat über die ByCS öffnen und ein neues <b>Lernszenario</b> oder einen neuen <b>Dialogpartner</b> anlegen.</li>
+            <li>AIS.chat über die ByCS öffnen. Je nach Einsatz: einen <b>normalen Chat</b> für den Beamer, ein <b>Lernszenario</b> oder einen <b>Dialogpartner</b> anlegen.</li>
             <li>Hier Klasse, Fach und Thema wählen.</li>
             <li>Die Felder der Reihe nach kopieren und einfügen. <mark>Gelb markierte Stellen</mark> vorher anpassen.</li>
             <li>Bild herunterladen und bei „Bild hochladen“ einfügen.</li>
@@ -115,7 +123,7 @@
             <li>Kurze Einsätze von 5–15 Minuten statt ganzer Stunden.</li>
             <li>Klarer Auftrag vorab, z. B. „Stelle 3 Fragen, schreibe 1 Antwort ins Heft.“</li>
             <li>Ergebnisse analog sichern (Heft, GoodNotes) – nicht nur im Chat.</li>
-            <li>Kl. 1/2: Start immer gemeinsam am Beamer. Eigenständig ab Kl. 3/4.</li>
+            <li>Kl. 1: nur gemeinsam am Beamer – die Lehrkraft tippt und liest vor. Ab Kl. 2 schrittweise selbst am Tablet.</li>
           </ul>
         </div>
       </details>
@@ -164,6 +172,36 @@ function instruktionen(s,k,typ){
   return fill(t,s,k);
 }
 
+const EF = {
+  beamer:{icon:"🖥️",kurz:"Beamer",lang:"Am Beamer mit der ganzen Klasse"},
+  partner:{icon:"👥",kurz:"Partnerarbeit",lang:"Partnerarbeit am Tablet"},
+  einzel:{icon:"👤",kurz:"Einzelarbeit",lang:"Einzelarbeit am Tablet"}
+};
+function einsatz(s,k){
+  if(k===1) return "beamer";
+  if(k===2) return s.ef2 || (s.ef==="beamer" ? "beamer" : "partner");
+  return s.ef || (s.typ==="DP" ? "partner" : "einzel");
+}
+function efBadge(e){ return `<span class="badge ${e}">${EF[e].icon} ${EF[e].kurz}</span>`; }
+
+function beamerPrompt(s,k){
+  const lesen = k===1 ? "Die Kinder können noch nicht lesen und schreiben. " : (k===2 ? "Die Kinder lesen noch langsam. " : "");
+  const v = s.verhalten.concat([
+    "Sprich die Klasse mit „ihr“ an.",
+    "Antworte in 1 bis 2 sehr kurzen Sätzen, die man gut vorlesen kann.",
+    "Gibt es Antwortmöglichkeiten, nenne höchstens 3 und nummeriere sie mit 1, 2, 3 (nicht A, B, C), jede mit einem passenden Emoji. Die Kinder zeigen ihre Antwort mit den Fingern.",
+    "Benutze passende Emojis als Bildhilfe.",
+    "Sag nicht einfach die Lösung. Gib lieber einen kleinen Tipp, damit die Kinder selbst darauf kommen.",
+    "Bleib beim Thema. Lenke freundlich zurück, wenn etwas anderes kommt.",
+    "Frag nie nach Namen, Adressen oder Fotos der Kinder.",
+    s.absicht ? "Die eingebauten Fehler sind Absicht. Alles andere muss stimmen." : "Wenn du etwas nicht sicher weißt, sag das ehrlich.",
+    "Lobe die Klasse ehrlich und freundlich."
+  ]).map(x=>"- "+x).join("\n");
+  const f = (s.format||[]).concat(["Beginne jetzt mit: „"+s.einstieg+"“"]).map(x=>"- "+x).join("\n");
+  const t = "Wir nutzen dich gemeinsam als Klasse am Beamer. Ich bin die Lehrkraft einer {KL}. Klasse. "+lesen+"Ich tippe die Antworten der Kinder ein und lese deine Antworten laut vor. Mit „das Kind“ ist unten die ganze Klasse gemeint.\n\nROLLE\n"+s.rolle+"\n\nKONTEXT\n"+s.kontext+"\n\nVERHALTEN\n"+v+"\n\nFORMAT\n"+f;
+  return fill(t,s,k);
+}
+
 let feldNr = 0;
 function feldKopie(label, text, opts={}){
   feldNr++;
@@ -181,11 +219,11 @@ function feldInfo(label, html){
 
 function route(){
   const p = new URLSearchParams(location.hash.slice(1));
-  return {k: p.get("k") ? parseInt(p.get("k")) : null, f: p.get("f"), t: p.get("t"), m: p.get("m")};
+  return {k: p.get("k") ? parseInt(p.get("k")) : null, f: p.get("f"), t: p.get("t"), m: p.get("m"), e: p.get("e")};
 }
 function link(o){
   const p = new URLSearchParams();
-  if(o.k) p.set("k",o.k); if(o.f) p.set("f",o.f); if(o.t) p.set("t",o.t); if(o.m) p.set("m",o.m);
+  if(o.k) p.set("k",o.k); if(o.f) p.set("f",o.f); if(o.t) p.set("t",o.t); if(o.m) p.set("m",o.m); if(o.e) p.set("e",o.e);
   return "#"+p.toString();
 }
 
@@ -205,7 +243,7 @@ function renderCrumbs(r){
 }
 
 function viewKlasse(){
-  const txt = {1:"Erste Schritte – gemeinsam am Beamer",2:"Kurze Übungen mit Tipps",3:"Eigenständig arbeiten",4:"Eigenständig und kritisch prüfen"};
+  const txt = {1:"Nur am Beamer – die Lehrkraft tippt und liest vor",2:"Am Beamer oder zu zweit am Tablet",3:"Zu zweit oder allein am Tablet",4:"Allein arbeiten und kritisch prüfen"};
   app.innerHTML = `<h2>Für welche Klasse suchst du etwas?</h2><div class="kacheln">`+
     [1,2,3,4].map(k=>`<a class="kachel" href="${link({k})}"><span class="gross">${k}.</span><span class="titel">Klasse</span><span class="sub">${txt[k]} · ${SZENARIEN.filter(s=>s.kl.includes(k)).length} Themen</span></a>`).join("")+`</div>`;
 }
@@ -217,21 +255,27 @@ function viewFach(k){
     return `<a class="kachel" href="${link({k,f:id})}"><span class="icon">${f.icon}</span><span class="titel">${f.name}</span><span class="sub">${n} ${n===1?"Thema":"Themen"}</span></a>`;
   }).join("");
   const nl = LEHRKRAFT.filter(l=>l.kl.includes(k)).length;
-  app.innerHTML = `<h2>Welches Fach? <small style="font-weight:500;color:var(--grau)">(${k}. Klasse)</small></h2><div class="kacheln">${f}
-    <a class="kachel lk" href="${link({k,f:"lehrkraft"})}"><span class="icon">🧑‍🏫</span><span class="titel">Für dich als Lehrkraft</span><span class="sub">${nl} Prompts zur Vorbereitung – im normalen Chat</span></a></div>`;
+  const lk = `<a class="kachel lk" href="${link({k,f:"lehrkraft"})}"><span class="icon">🧑‍🏫</span><span class="titel">Für dich als Lehrkraft</span><span class="sub">${nl} Prompts zur Vorbereitung – im normalen Chat</span></a>`;
+  const banner = k===1 ? `<div class="banner"><b>Klasse 1:</b> Die Kinder lesen und schreiben noch nicht. Darum läuft hier alles <b>gemeinsam am Beamer</b>: Du tippst ein, was die Kinder sagen, und liest die Antworten vor. Den größten Nutzen hast du in Klasse 1 bei der <b>Vorbereitung</b>.</div>` : "";
+  app.innerHTML = `<h2>Welches Fach? <small style="font-weight:500;color:var(--grau)">(${k}. Klasse)</small></h2>${banner}<div class="kacheln">${k===1?lk+f:f+lk}</div>`;
 }
 
-function viewThemen(k,f){
+function viewThemen(k,f,e){
   if(f==="lehrkraft") return viewLehrkraftListe(k);
-  const liste = SZENARIEN.filter(s=>s.fach===f && s.kl.includes(k));
+  const alle = SZENARIEN.filter(s=>s.fach===f && s.kl.includes(k));
+  const liste = e ? alle.filter(s=>einsatz(s,k)===e) : alle;
   const gruppen = {};
   liste.forEach(s=>{(gruppen[s.lb]=gruppen[s.lb]||[]).push(s)});
   let html = `<h2>${FAECHER[f].icon} ${FAECHER[f].name} · ${k}. Klasse</h2><p class="hinweis">Gruppiert nach Lernbereichen des LehrplanPLUS. Tippe auf ein Thema.</p>`;
+  if(k>1){
+    const da = ["beamer","partner","einzel"].filter(x=>alle.some(s=>einsatz(s,k)===x));
+    html += `<div class="filter"><a href="${link({k,f})}" class="${!e?"an":""}">Alle</a>`+da.map(x=>`<a href="${link({k,f,e:x})}" class="${e===x?"an":""}">${EF[x].icon} ${EF[x].lang}</a>`).join("")+`</div>`;
+  }
   for(const lb in gruppen){
     html += `<h3 class="gruppe">${esc(lb)}</h3><div class="liste">`+gruppen[lb].map(s=>`
       <a class="thema" href="${link({k,f,t:s.id})}"><img src="bilder/${s.bild}.png" alt="" loading="lazy">
         <div><div class="t">${esc(s.titel)}</div><div class="k">${esc(fill(s.kurz,s,k))}</div>
-        <div class="badges"><span class="badge ${s.typ==="LS"?"ls":"dp"}">${s.typ==="LS"?"Lernszenario":"Dialogpartner"}</span></div></div></a>`).join("")+`</div>`;
+        <div class="badges">${efBadge(einsatz(s,k))}${k>1?`<span class="badge ${s.typ==="LS"?"ls":"dp"}">${s.typ==="LS"?"Lernszenario":"Dialogpartner"}</span>`:""}</div></div></a>`).join("")+`</div>`;
   }
   app.innerHTML = html;
 }
@@ -239,22 +283,49 @@ function viewThemen(k,f){
 function viewDetail(k,f,id,modus){
   const s = SZENARIEN.find(x=>x.id===id);
   if(!s){ app.innerHTML = "<p>Thema nicht gefunden.</p>"; return; }
-  const typ = modus || s.typ;
+  const ef = einsatz(s,k);
+  const standard = ef==="beamer" ? "B" : s.typ;
+  const typ = k===1 ? "B" : (modus || standard);
   feldNr = 0;
   const F = t=>fill(t,s,k);
+  const tipp = (k===1 && s.b1) ? s.b1.tipp : s.tipp;
+  const auftrag = (k===1 && s.b1) ? s.b1.auftrag : s.auftrag;
+  const name = {B:"Am Beamer (normaler Chat)",LS:"Lernszenario",DP:"Dialogpartner"};
   let html = `<a class="zurueck" href="${link({k,f})}">← Zurück zu den Themen</a>
   <div class="kopf"><img src="bilder/${s.bild}.png" alt="">
     <div><h2>${esc(s.titel)}</h2>
-      <div class="badges"><span class="badge ${s.typ==="LS"?"ls":"dp"}">Empfohlen: ${s.typ==="LS"?"Lernszenario":"Dialogpartner"}</span><span class="badge lb">${esc(FAECHER[s.fach].name)} · ${esc(s.lb)}</span><span class="badge">${k}. Klasse</span></div>
+      <div class="badges">${efBadge(ef)}<span class="badge lb">${esc(FAECHER[s.fach].name)} · ${esc(s.lb)}</span><span class="badge">${k}. Klasse</span></div>
       <p>${esc(F(s.kurz))}</p>
-      ${s.tipp?`<div class="tipp">💡 <b>Tipp für den Unterricht:</b> ${markiere(F(s.tipp))}</div>`:""}
-    </div></div>
-  <div class="typwahl"><b>Anlegen als:</b>
-    <button class="${typ==="LS"?"an":""}" data-modus="LS">Lernszenario</button>
-    <button class="${typ==="DP"?"an":""}" data-modus="DP">Dialogpartner</button></div>
-  <p class="hinweis">${typ==="LS"
-    ? "In AIS.chat ein neues <b>Lernszenario</b> anlegen und diese Felder von oben nach unten ausfüllen."
-    : "In AIS.chat einen neuen <b>Dialogpartner</b> anlegen und diese Felder ausfüllen. Heißt ein Feld bei dir etwas anders, nimm das passende – oder lege es als Lernszenario an (Knopf oben)."}</p>`;
+      ${tipp?`<div class="tipp">💡 <b>Tipp für den Unterricht:</b> ${markiere(F(tipp))}</div>`:""}
+    </div></div>`;
+  if(k===1){
+    html += `<p class="hinweis" style="margin-top:20px">In Klasse 1 läuft alles <b>gemeinsam am Beamer</b>: Du öffnest einen normalen Chat, tippst ein, was die Kinder sagen, und liest die Antworten vor.</p>`;
+  } else {
+    html += `<div class="typwahl"><b>Anlegen als:</b>`+["B","LS","DP"].map(m=>`<button class="${typ===m?"an":""}" data-modus="${m}">${name[m]}${m===standard?" ★":""}</button>`).join("")+`</div>
+    <p class="hinweis">★ = empfohlen. ${typ==="B"
+      ? "Einen <b>normalen Chat</b> öffnen und am Beamer zeigen. Du tippst ein, was die Klasse sagt."
+      : typ==="LS"
+      ? "In AIS.chat ein neues <b>Lernszenario</b> anlegen und diese Felder von oben nach unten ausfüllen."
+      : "In AIS.chat einen neuen <b>Dialogpartner</b> anlegen und diese Felder ausfüllen. Heißt ein Feld bei dir etwas anders, nimm das passende – oder lege es als Lernszenario an."}</p>`;
+  }
+
+  if(typ==="B"){
+    html += feldInfo("In AIS.chat", "Einen <b>neuen Chat</b> öffnen und den Bildschirm am Beamer zeigen.");
+    html += feldInfo("Sprachmodell", esc(MODELLE[s.modell]));
+    html += feldKopie("Prompt", beamerPrompt(s,k), {lang:true, hinweis:"Einfügen und absenden – die Figur beginnt dann von selbst."});
+    html += feldKopie("Auftrag an die Klasse", F(auftrag), {hinweis:"Mündlich geben oder an die Tafel schreiben."});
+    html += feldInfo("Bild (optional)", `<div class="bildfeld"><img src="bilder/${s.bild}.png" alt=""><span>Die Figur zum Zeigen oder Ausdrucken.</span><a class="knopf" href="bilder/${s.bild}.png" download="${s.bild}.png">⬇️ Bild herunterladen</a></div>`);
+    if(s.hw) html += feldInfo("Zusätzlich einfügen", "📎 Füge nach dem Prompt in einer zweiten Nachricht ein: "+markiere(F(s.hw.replace(/^Datei: /,""))));
+    html += `<div class="teilen"><h3>So läuft es in der Klasse</h3><ol>
+      <li>Vorher kurz selbst ausprobieren.</li>
+      <li>Du liest die Antwort der Figur laut vor.</li>
+      <li>Die Kinder antworten mündlich oder zeigen mit den Fingern 1, 2 oder 3.</li>
+      <li>Du tippst die Antwort der Klasse ein – ohne Namen von Kindern.</li>
+      <li>Zum Schluss: Was haben wir gelernt? Ergebnis malen, zeigen oder ins Heft.</li></ol></div>`;
+    app.innerHTML = html;
+    app.querySelectorAll("[data-modus]").forEach(b=>b.onclick=()=>{location.hash = link({k,f,t:id,m:b.dataset.modus===standard?null:b.dataset.modus})});
+    return;
+  }
 
   html += feldInfo("Bild hochladen", `<div class="bildfeld"><img src="bilder/${s.bild}.png" alt=""><a class="knopf" href="bilder/${s.bild}.png" download="${s.bild}.png">⬇️ Bild herunterladen</a></div>`);
   html += feldKopie(typ==="LS"?"Name des Lernszenarios":"Name des Dialogpartners", F(s.name), {pflicht:true, max:50});
@@ -262,23 +333,22 @@ function viewDetail(k,f,id,modus){
   html += feldInfo("Sprachmodell", esc(MODELLE[s.modell]));
   if(typ==="LS"){
     html += feldKopie("Instruktionen", instruktionen(s,k,"LS"), {lang:true, hinweis:"Alles in das Feld „Instruktionen“ einfügen. Die Regeln für Grundschulkinder sind schon enthalten."});
-    html += feldKopie("Arbeitsauftrag", F(s.auftrag), {hinweis:"Das sehen die Kinder als Aufgabe."});
+    html += feldKopie("Arbeitsauftrag", F(auftrag), {hinweis:"Das sehen die Kinder als Aufgabe."});
   } else {
     html += feldInfo("Schulart, Klassenstufe und Fach", `Grundschule · ${k}. Klasse · ${esc(FAECHER[s.fach].name)}`);
     html += feldKopie("Kompetenzen und Unterrichtssituation", F(s.kompetenz || (s.lb+": "+s.kurz)));
     html += feldKopie("Einstiegsfrage", F(s.einstieg), {hinweis:"Die erste Nachricht der Figur."});
     html += feldKopie("Verhalten / Antwortverhalten", instruktionen(s,k,"DP"), {lang:true, hinweis:"In das Feld für Beschreibung und Verhalten der Figur einfügen. Die Regeln für Grundschulkinder sind schon enthalten."});
-    html += feldKopie("Arbeitsauftrag für die Kinder", F(s.auftrag), {hinweis:"Gibt es dafür kein Feld, an die Tafel schreiben oder mündlich geben."});
+    html += feldKopie("Arbeitsauftrag für die Kinder", F(auftrag), {hinweis:"Gibt es dafür kein Feld, an die Tafel schreiben oder mündlich geben."});
   }
   if(s.hw) html += feldInfo("Hintergrundwissen", "📎 "+markiere(F(s.hw)));
-
   html += `<div class="teilen"><h3>Speichern, testen und teilen</h3><ol>
     <li>Speichern und <b>selbst als Kind ausprobieren</b>. Passt etwas nicht, die Instruktionen anpassen.</li>
     <li>Teilen: Laufzeit kurz wählen (z. B. diese Unterrichtsstunde oder einen Tag).</li>
     <li>QR-Code am Beamer zeigen oder den Link an die Klasse geben. Die Kinder brauchen kein eigenes Konto.</li>
     <li>Arbeitsauftrag mündlich wiederholen: Was soll am Ende im Heft stehen?</li></ol></div>`;
   app.innerHTML = html;
-  app.querySelectorAll("[data-modus]").forEach(b=>b.onclick=()=>{location.hash = link({k,f,t:id,m:b.dataset.modus===s.typ?null:b.dataset.modus})});
+  app.querySelectorAll("[data-modus]").forEach(b=>b.onclick=()=>{location.hash = link({k,f,t:id,m:b.dataset.modus===standard?null:b.dataset.modus})});
 }
 
 function viewLehrkraftListe(k){
@@ -311,7 +381,7 @@ function render(){
   renderCrumbs(r);
   if(!r.k) viewKlasse();
   else if(!r.f) viewFach(r.k);
-  else if(!r.t) viewThemen(r.k,r.f);
+  else if(!r.t) viewThemen(r.k,r.f,r.e);
   else if(r.f==="lehrkraft") viewLehrkraftDetail(r.k,r.t);
   else viewDetail(r.k,r.f,r.t,r.m);
   window.scrollTo(0,0);
