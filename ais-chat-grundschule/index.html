@@ -102,14 +102,13 @@
     <p>Fertige Lernszenarien und Dialogpartner zum Kopieren – nach Klasse, Fach und Thema, orientiert am LehrplanPLUS Bayern.</p>
     <div class="hilfe">
       <details class="info">
-        <summary>So geht's in 5 Schritten</summary>
+        <summary>So geht's in 4 Schritten</summary>
         <div class="inhalt">
           <ol>
             <li>AIS.chat über die ByCS öffnen. Je nach Einsatz: einen <b>normalen Chat</b> für den Beamer, ein <b>Lernszenario</b> oder einen <b>Dialogpartner</b> anlegen.</li>
             <li>Hier Klasse, Fach und Thema wählen.</li>
-            <li>Die Felder der Reihe nach kopieren und einfügen. <mark>Gelb markierte Stellen</mark> vorher anpassen.</li>
-            <li>Bild herunterladen und bei „Bild hochladen“ einfügen.</li>
-            <li>Speichern, <b>selbst als Kind testen</b>, dann teilen: Laufzeit wählen und QR-Code oder Link an die Klasse geben.</li>
+            <li>Bild, Name, Kurzbeschreibung, Instruktionen und Einstiegsfrage kopieren und einfügen. <mark>Gelb markierte Stellen</mark> vorher anpassen. Websuche aus lassen.</li>
+                        <li>Speichern, <b>selbst als Kind testen</b>, dann teilen: Laufzeit wählen und QR-Code oder Link an die Klasse geben.</li>
           </ol>
         </div>
       </details>
@@ -164,11 +163,11 @@ function grundregeln(s){
   return r;
 }
 
-function instruktionen(s,k,typ){
+function instruktionen(s,k,typ,auftrag){
   const v = s.verhalten.concat(grundregeln(s)).map(x=>"- "+x).join("\n");
   let f = ["Antworte normalerweise mit {SAETZE}."].concat(s.format||[]);
   if(typ==="LS") f.push("Deine erste Nachricht im Gespräch: „"+s.einstieg+"“");
-  const t = "ROLLE\n"+s.rolle+"\n\nKONTEXT\n"+s.kontext+"\n\nVERHALTEN\n"+v+"\n\nFORMAT\n"+f.map(x=>"- "+x).join("\n");
+  const t = "ROLLE\n"+s.rolle+"\n\nKONTEXT\n"+s.kontext+(auftrag?"\nAufgabe der Kinder: "+auftrag:"")+"\n\nVERHALTEN\n"+v+"\n\nFORMAT\n"+f.map(x=>"- "+x).join("\n");
   return fill(t,s,k);
 }
 
@@ -284,71 +283,44 @@ function viewDetail(k,f,id,modus){
   const s = SZENARIEN.find(x=>x.id===id);
   if(!s){ app.innerHTML = "<p>Thema nicht gefunden.</p>"; return; }
   const ef = einsatz(s,k);
-  const standard = ef==="beamer" ? "B" : s.typ;
+  const standard = ef==="beamer" ? "B" : "T";
   const typ = k===1 ? "B" : (modus || standard);
   feldNr = 0;
   const F = t=>fill(t,s,k);
-  const tipp = (k===1 && s.b1) ? s.b1.tipp : s.tipp;
+  let tipp = (k===1 && s.b1) ? s.b1.tipp : s.tipp;
   const auftrag = (k===1 && s.b1) ? s.b1.auftrag : s.auftrag;
-  const name = {B:"Am Beamer (normaler Chat)",LS:"Lernszenario",DP:"Dialogpartner"};
+  if(s.hw && typ==="T") tipp = (tipp ? tipp+" " : "") + "Unter „Hintergrundwissen“ zusätzlich hochladen: " + s.hw.replace(/^Datei: /,"");
+  const anlegen = typ==="B" ? "Normaler Chat am Beamer" : (s.typ==="LS" ? "Lernszenario" : "Dialogpartner");
   let html = `<a class="zurueck" href="${link({k,f})}">← Zurück zu den Themen</a>
   <div class="kopf"><img src="bilder/${s.bild}.png" alt="">
     <div><h2>${esc(s.titel)}</h2>
-      <div class="badges">${efBadge(ef)}<span class="badge lb">${esc(FAECHER[s.fach].name)} · ${esc(s.lb)}</span><span class="badge">${k}. Klasse</span></div>
+      <div class="badges">${efBadge(ef)}<span class="badge ${typ==="B"?"beamer":(s.typ==="LS"?"ls":"dp")}">Anlegen als: ${anlegen}</span><span class="badge">${k}. Klasse</span></div>
       <p>${esc(F(s.kurz))}</p>
-      ${tipp?`<div class="tipp">💡 <b>Tipp für den Unterricht:</b> ${markiere(F(tipp))}</div>`:""}
+      ${tipp?`<div class="tipp">💡 <b>Tipp:</b> ${markiere(F(tipp))}</div>`:""}
     </div></div>`;
-  if(k===1){
-    html += `<p class="hinweis" style="margin-top:20px">In Klasse 1 läuft alles <b>gemeinsam am Beamer</b>: Du öffnest einen normalen Chat, tippst ein, was die Kinder sagen, und liest die Antworten vor.</p>`;
-  } else {
-    html += `<div class="typwahl"><b>Anlegen als:</b>`+["B","LS","DP"].map(m=>`<button class="${typ===m?"an":""}" data-modus="${m}">${name[m]}${m===standard?" ★":""}</button>`).join("")+`</div>
-    <p class="hinweis">★ = empfohlen. ${typ==="B"
-      ? "Einen <b>normalen Chat</b> öffnen und am Beamer zeigen. Du tippst ein, was die Klasse sagt."
-      : typ==="LS"
-      ? "In AIS.chat ein neues <b>Lernszenario</b> anlegen und diese Felder von oben nach unten ausfüllen."
-      : "In AIS.chat einen neuen <b>Dialogpartner</b> anlegen und diese Felder ausfüllen. Heißt ein Feld bei dir etwas anders, nimm das passende – oder lege es als Lernszenario an."}</p>`;
+  if(k>1){
+    html += typ==="B"
+      ? `<p class="hinweis" style="margin-top:16px">Lieber mit der Klasse teilen? <a href="${link({k,f,t:id,m:standard==="T"?null:"T"})}">Zur Variante zum Teilen</a></p>`
+      : `<p class="hinweis" style="margin-top:16px">Lieber gemeinsam am Beamer? <a href="${link({k,f,t:id,m:standard==="B"?null:"B"})}">Zur Beamer-Variante</a></p>`;
   }
 
   if(typ==="B"){
-    html += feldInfo("In AIS.chat", "Einen <b>neuen Chat</b> öffnen und den Bildschirm am Beamer zeigen.");
+    html += feldInfo("Bild", `<div class="bildfeld"><img src="bilder/${s.bild}.png" alt=""><span>Optional: zum Zeigen oder Ausdrucken.</span><a class="knopf" href="bilder/${s.bild}.png" download="${s.bild}.png">⬇️ Herunterladen</a></div>`);
     html += feldInfo("Sprachmodell", esc(MODELLE[s.modell]));
-    html += feldKopie("Prompt", beamerPrompt(s,k), {lang:true, hinweis:"Einfügen und absenden – die Figur beginnt dann von selbst."});
-    html += feldKopie("Auftrag an die Klasse", F(auftrag), {hinweis:"Mündlich geben oder an die Tafel schreiben."});
-    html += feldInfo("Bild (optional)", `<div class="bildfeld"><img src="bilder/${s.bild}.png" alt=""><span>Die Figur zum Zeigen oder Ausdrucken.</span><a class="knopf" href="bilder/${s.bild}.png" download="${s.bild}.png">⬇️ Bild herunterladen</a></div>`);
-    if(s.hw) html += feldInfo("Zusätzlich einfügen", "📎 Füge nach dem Prompt in einer zweiten Nachricht ein: "+markiere(F(s.hw.replace(/^Datei: /,""))));
-    html += `<div class="teilen"><h3>So läuft es in der Klasse</h3><ol>
-      <li>Vorher kurz selbst ausprobieren.</li>
-      <li>Du liest die Antwort der Figur laut vor.</li>
-      <li>Die Kinder antworten mündlich oder zeigen mit den Fingern 1, 2 oder 3.</li>
-      <li>Du tippst die Antwort der Klasse ein – ohne Namen von Kindern.</li>
-      <li>Zum Schluss: Was haben wir gelernt? Ergebnis malen, zeigen oder ins Heft.</li></ol></div>`;
-    app.innerHTML = html;
-    app.querySelectorAll("[data-modus]").forEach(b=>b.onclick=()=>{location.hash = link({k,f,t:id,m:b.dataset.modus===standard?null:b.dataset.modus})});
-    return;
-  }
-
-  html += feldInfo("Bild hochladen", `<div class="bildfeld"><img src="bilder/${s.bild}.png" alt=""><a class="knopf" href="bilder/${s.bild}.png" download="${s.bild}.png">⬇️ Bild herunterladen</a></div>`);
-  html += feldKopie(typ==="LS"?"Name des Lernszenarios":"Name des Dialogpartners", F(s.name), {pflicht:true, max:50});
-  html += feldKopie("Kurzbeschreibung", F(s.kb));
-  html += feldInfo("Sprachmodell", esc(MODELLE[s.modell]));
-  if(typ==="LS"){
-    html += feldKopie("Instruktionen", instruktionen(s,k,"LS"), {lang:true, hinweis:"Alles in das Feld „Instruktionen“ einfügen. Die Regeln für Grundschulkinder sind schon enthalten."});
-    html += feldKopie("Arbeitsauftrag", F(auftrag), {hinweis:"Das sehen die Kinder als Aufgabe."});
+    html += feldKopie("Prompt – in einen neuen Chat einfügen", beamerPrompt(s,k), {lang:true, hinweis:"Absenden – die Figur beginnt dann von selbst. Du liest vor und tippst ein, was die Klasse sagt."});
+    html += feldInfo("Websuche", "<b>Aus</b> lassen.");
+    html += `<div class="teilen"><b>Auftrag an die Klasse:</b> ${markiere(F(auftrag))}</div>`;
   } else {
-    html += feldInfo("Schulart, Klassenstufe und Fach", `Grundschule · ${k}. Klasse · ${esc(FAECHER[s.fach].name)}`);
-    html += feldKopie("Kompetenzen und Unterrichtssituation", F(s.kompetenz || (s.lb+": "+s.kurz)));
-    html += feldKopie("Einstiegsfrage", F(s.einstieg), {hinweis:"Die erste Nachricht der Figur."});
-    html += feldKopie("Verhalten / Antwortverhalten", instruktionen(s,k,"DP"), {lang:true, hinweis:"In das Feld für Beschreibung und Verhalten der Figur einfügen. Die Regeln für Grundschulkinder sind schon enthalten."});
-    html += feldKopie("Arbeitsauftrag für die Kinder", F(auftrag), {hinweis:"Gibt es dafür kein Feld, an die Tafel schreiben oder mündlich geben."});
+    html += feldInfo("Bild hochladen", `<div class="bildfeld"><img src="bilder/${s.bild}.png" alt=""><a class="knopf" href="bilder/${s.bild}.png" download="${s.bild}.png">⬇️ Bild herunterladen</a></div>`);
+    html += feldKopie("Name", F(s.name), {pflicht:true, max:50});
+    html += feldKopie("Kurzbeschreibung", F(s.kb));
+    html += feldInfo("Sprachmodell", esc(MODELLE[s.modell]));
+    html += feldKopie("Instruktionen", instruktionen(s,k,"LS",auftrag), {lang:true, hinweis:"Alles einfügen. Die Regeln für Grundschulkinder sind schon enthalten."});
+    html += feldKopie("Einstiegsfrage", F(s.einstieg));
+    html += feldInfo("Websuche für Aktuelles", "<b>Aus</b> lassen – so bleibt die KI beim Thema.");
+    html += `<div class="teilen"><b>Danach:</b> Speichern → selbst als Kind testen → teilen (kurze Laufzeit, QR-Code am Beamer zeigen).</div>`;
   }
-  if(s.hw) html += feldInfo("Hintergrundwissen", "📎 "+markiere(F(s.hw)));
-  html += `<div class="teilen"><h3>Speichern, testen und teilen</h3><ol>
-    <li>Speichern und <b>selbst als Kind ausprobieren</b>. Passt etwas nicht, die Instruktionen anpassen.</li>
-    <li>Teilen: Laufzeit kurz wählen (z. B. diese Unterrichtsstunde oder einen Tag).</li>
-    <li>QR-Code am Beamer zeigen oder den Link an die Klasse geben. Die Kinder brauchen kein eigenes Konto.</li>
-    <li>Arbeitsauftrag mündlich wiederholen: Was soll am Ende im Heft stehen?</li></ol></div>`;
   app.innerHTML = html;
-  app.querySelectorAll("[data-modus]").forEach(b=>b.onclick=()=>{location.hash = link({k,f,t:id,m:b.dataset.modus===standard?null:b.dataset.modus})});
 }
 
 function viewLehrkraftListe(k){

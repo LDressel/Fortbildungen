@@ -31,7 +31,7 @@ const GLOBAL_VARS = {
 };
 
 const MODELLE = {
-  luna: "GPT-5.6-luna (ist voreingestellt). Reicht für diese kurze Übung und spart Points.",
+  luna: "GPT-5.6-luna (ist voreingestellt). Reicht für diese kurze Übung und spart Tokens.",
   gross: "Ein größeres Modell, falls deine Liste eins anbietet (z. B. ein GPT-Modell ohne „luna“). Rollenspiele und Rückmeldungen wirken damit natürlicher. GPT-5.6-luna funktioniert aber auch."
 };
 
